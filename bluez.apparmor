@@ -1,0 +1,222 @@
+#
+# AppArmor confinement for bluez
+#
+
+#include <tunables/global>
+
+# Specified profile variables
+###VAR###
+
+###PROFILEATTACH### (attach_disconnected) {
+  #include <abstractions/base>
+  #include <abstractions/openssl>
+
+  # Explicitly deny ptrace for now since it can be abused to break out of the
+  # seccomp sandbox. https://lkml.org/lkml/2015/3/18/823
+  audit deny ptrace (trace),
+
+  # Explicitly deny mount, remount and umount
+  audit deny mount,
+  audit deny remount,
+  audit deny umount,
+
+  # Read-only for the install directory
+  @{CLICK_DIR}/@{APP_PKGNAME}/                   r,
+  @{CLICK_DIR}/@{APP_PKGNAME}/@{APP_VERSION}/    r,
+  @{CLICK_DIR}/@{APP_PKGNAME}/@{APP_VERSION}/**  mrklix,
+
+  # Read-only home area for other versions
+  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/                  r,
+  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/   r,
+  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/** mrkix,
+
+  # Writable home area for this version.
+  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/   w,
+  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/** wl,
+
+  # Read-only system area for other versions
+  /var/lib/apps/@{APP_PKGNAME}/   r,
+  /var/lib/apps/@{APP_PKGNAME}/** mrkix,
+
+  # Writable system area only for this version
+  /var/lib/apps/@{APP_PKGNAME}/@{APP_VERSION}/   w,
+  /var/lib/apps/@{APP_PKGNAME}/@{APP_VERSION}/** wl,
+
+  # The ubuntu-core-launcher creates an app-specific private restricted /tmp
+  # and will fail to launch the app if something goes wrong. As such, we can
+  # simply allow full access to /tmp.
+  /tmp/   r,
+  /tmp/** mrwlkix,
+
+  # Miscellaneous accesses
+  /etc/mime.types r,
+  @{PROC}/ r,
+  /etc/{,writable/}hostname r,
+  /etc/{,writable/}localtime r,
+  /etc/{,writable/}timezone r,
+  @{PROC}/sys/kernel/hostname r,
+  @{PROC}/sys/kernel/osrelease r,
+  @{PROC}/sys/fs/file-max r,
+  @{PROC}/sys/kernel/pid_max r,
+  # this leaks interface names and stats, but not in a way that is traceable
+  # to the user/device
+  @{PROC}/net/dev r,
+
+  #
+  # Various accesses that may or may not be required for your framework.
+  # Adjust as necessary for your services.
+  #
+
+  # Shell (do not usually need abstractions/bash)
+  #include <abstractions/consoles>
+  /bin/bash ixr,
+  /bin/dash ixr,
+  /etc/bash.bashrc r,
+  /usr/share/terminfo/** r,
+  /etc/inputrc r,
+  deny @{HOME}/.inputrc r,
+  # Common utilities for shell scripts
+  /{,usr/}bin/{,g,m}awk ixr,
+  /{,usr/}bin/basename ixr,
+  /{,usr/}bin/bunzip2 ixr,
+  /{,usr/}bin/bzcat ixr,
+  /{,usr/}bin/bzdiff ixr,
+  /{,usr/}bin/bzgrep ixr,
+  /{,usr/}bin/bzip2 ixr,
+  /{,usr/}bin/cat ixr,
+  /{,usr/}bin/chmod ixr,
+  /{,usr/}bin/cmp ixr,
+  /{,usr/}bin/cp ixr,
+  /{,usr/}bin/cpio ixr,
+  /{,usr/}bin/cut ixr,
+  /{,usr/}bin/date ixr,
+  /{,usr/}bin/dd ixr,
+  /{,usr/}bin/diff{,3} ixr,
+  /{,usr/}bin/dir ixr,
+  /{,usr/}bin/dirname ixr,
+  /{,usr/}bin/echo ixr,
+  /{,usr/}bin/{,e,f,r}grep ixr,
+  /{,usr/}bin/env ixr,
+  /{,usr/}bin/expr ixr,
+  /{,usr/}bin/false ixr,
+  /{,usr/}bin/find ixr,
+  /{,usr/}bin/fmt ixr,
+  /{,usr/}bin/getopt ixr,
+  /{,usr/}bin/head ixr,
+  /{,usr/}bin/hostname ixr,
+  /{,usr/}bin/id ixr,
+  /{,usr/}bin/igawk ixr,
+  /{,usr/}bin/kill ixr,
+  /{,usr/}bin/ldd ixr,
+  /{,usr/}bin/ln ixr,
+  /{,usr/}bin/line ixr,
+  /{,usr/}bin/link ixr,
+  /{,usr/}bin/logger ixr,
+  /{,usr/}bin/ls ixr,
+  /{,usr/}bin/md5sum ixr,
+  /{,usr/}bin/mkdir ixr,
+  /{,usr/}bin/mktemp ixr,
+  /{,usr/}bin/mv ixr,
+  /{,usr/}bin/openssl ixr, # may cause harmless capability block_suspend denial
+  /{,usr/}bin/pgrep ixr,
+  /{,usr/}bin/printenv ixr,
+  /{,usr/}bin/printf ixr,
+  /{,usr/}bin/ps ixr,
+  /{,usr/}bin/pwd ixr,
+  /{,usr/}bin/readlink ixr,
+  /{,usr/}bin/realpath ixr,
+  /{,usr/}bin/rev ixr,
+  /{,usr/}bin/rm ixr,
+  /{,usr/}bin/rmdir ixr,
+  /{,usr/}bin/sed ixr,
+  /{,usr/}bin/seq ixr,
+  /{,usr/}bin/sleep ixr,
+  /{,usr/}bin/sort ixr,
+  /{,usr/}bin/stat ixr,
+  /{,usr/}bin/tac ixr,
+  /{,usr/}bin/tail ixr,
+  /{,usr/}bin/tar ixr,
+  /{,usr/}bin/tee ixr,
+  /{,usr/}bin/test ixr,
+  /{,usr/}bin/tempfile ixr,
+  /{,usr/}bin/touch ixr,
+  /{,usr/}bin/tr ixr,
+  /{,usr/}bin/true ixr,
+  /{,usr/}bin/uname ixr,
+  /{,usr/}bin/uniq ixr,
+  /{,usr/}bin/unlink ixr,
+  /{,usr/}bin/unxz ixr,
+  /{,usr/}bin/unzip ixr,
+  /{,usr/}bin/vdir ixr,
+  /{,usr/}bin/wc ixr,
+  /{,usr/}bin/which ixr,
+  /{,usr/}bin/xargs ixr,
+  /{,usr/}bin/xz ixr,
+  /{,usr/}bin/yes ixr,
+  /{,usr/}bin/zcat ixr,
+  /{,usr/}bin/z{,e,f}grep ixr,
+  /{,usr/}bin/zip ixr,
+  /{,usr/}bin/zipgrep ixr,
+  /{,usr/}bin/uptime ixr,
+  @{PROC}/uptime r,
+  @{PROC}/loadavg r,
+
+  #
+  # Framework service/binary specific rules below here
+  #
+  network bluetooth,
+
+  capability net_admin,
+  capability net_bind_service,
+
+  # File accesses
+  /sys/bus/usb/drivers/btusb/     r,
+  /sys/bus/usb/drivers/btusb/**   r,
+  /sys/class/bluetooth/           r,
+  /sys/devices/**/bluetooth/      rw,
+  /sys/devices/**/bluetooth/**    rw,
+  /sys/devices/**/id/chassis_type r,
+
+  # TODO: use snappy hardware assignment for this once LP: #1498917 is fixed
+  /dev/rfkill rw,
+
+  # DBus accesses
+  #include <abstractions/dbus-strict>
+  dbus (send)
+     bus=system
+     path=/org/freedesktop/DBus
+     interface=org.freedesktop.DBus
+     member={Request,Release}Name
+     peer=(name=org.freedesktop.DBus),
+
+  dbus (send)
+    bus=system
+    path=/org/freedesktop/*
+    interface=org.freedesktop.DBus.Properties
+    peer=(label=unconfined),
+
+  # Allow binding the service to the requested connection name
+  dbus (bind)
+      bus=system
+      name="org.bluez",
+
+  # Allow traffic to/from our path and interface with any method
+  dbus (receive, send)
+      bus=system
+      path=/org/bluez{,/**}
+      interface=org.bluez.*,
+
+  # Allow traffic to/from org.freedesktop.DBus for bluez service
+  dbus (receive, send)
+      bus=system
+      path=/
+      interface=org.freedesktop.DBus.**,
+  dbus (receive, send)
+      bus=system
+      path=/org/bluez{,/**}
+      interface=org.freedesktop.DBus.**,
+
+  # Allow replacing our dbus policy configuration file until
+  # snappy has a better way to do this.
+  /etc/dbus-1/system.d/bluez_* rw,
+}

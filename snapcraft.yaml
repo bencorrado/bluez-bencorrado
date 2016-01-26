@@ -1,0 +1,50 @@
+name: bluez
+version: 5.37-1
+icon: icon.png
+type: app
+summary: Bluetooth tools and daemons
+description: This package contains tools and system daemons for using Bluetooth devices.
+BlueZ is the official Linux Bluetooth protocol stack. It is an Open Source
+project distributed under GNU General Public License (GPL).
+
+apps:
+  bluetoothctl:
+    command: usr/bin/bluetoothctl
+  bluez:
+    command: "usr/libexec/bluetooth/bluetoothd -E"
+    daemon: simple
+    security-policy: 
+      apparmor: bluez.apparmor
+      seccomp: bluez.seccomp
+     
+parts:
+  bluez:
+    plugin: autotools
+    source: git://git.kernel.org/pub/scm/bluetooth/bluez.git
+    source-tag: "5.37"
+    configflags:
+      - --prefix=/usr
+      - --enable-experimental
+      - --enable-snappy
+      - --enable-threads
+      - --disable-cups
+      - --disable-monitor
+      - --disable-obex
+      - --disable-systemd
+      - --disable-silent-rules
+    build-packages:
+      - libreadline6-dev    
+      - libudev-dev
+      - pkg-config
+    stage-packages:
+      - libglib2.0-dev
+      - libdbus-1-dev
+    snap:
+      - usr/libexec/bluetooth/bluetoothd
+      - usr/bin/bluetoothctl
+  dbus-configuration:
+    plugin: copy
+    files: 
+      conf/bluez-dbus.conf: conf/bluez-dbus.conf
+
+    
