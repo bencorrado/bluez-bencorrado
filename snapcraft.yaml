@@ -3,9 +3,9 @@ version: 5.37-1
 icon: icon.png
 type: app
 summary: Bluetooth tools and daemons
-description: This package contains tools and system daemons for using Bluetooth devices.
-BlueZ is the official Linux Bluetooth protocol stack. It is an Open Source
-project distributed under GNU General Public License (GPL).
+description: "This package contains tools and system daemons for using Bluetooth
+devices. BlueZ is the official Linux Bluetooth protocol stack. It is an Open Source
+project distributed under GNU General Public License (GPL)."
 
 apps:
   bluetoothctl:
@@ -46,5 +46,3 @@ parts:
     plugin: copy
     files: 
       conf/bluez-dbus.conf: conf/bluez-dbus.conf
-
-    
