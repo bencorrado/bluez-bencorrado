@@ -1,0 +1,609 @@
+Index: bluez-5.37/src/adapter.c
+===================================================================
+--- bluez-5.37.orig/src/adapter.c
++++ bluez-5.37/src/adapter.c
+@@ -456,7 +456,8 @@ static void store_adapter_info(struct bt
+ 							adapter->stored_alias);
+ 
+ 	ba2str(&adapter->bdaddr, address);
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/settings", address);
++	snprintf(filename, PATH_MAX, "%s/%s/settings", get_storage_dir(),
++			address);
+ 
+ 	create_file(filename, S_IRUSR | S_IWUSR);
+ 
+@@ -3510,7 +3511,7 @@ static void load_devices(struct btd_adap
+ 
+ 	ba2str(&adapter->bdaddr, srcaddr);
+ 
+-	snprintf(dirname, PATH_MAX, STORAGEDIR "/%s", srcaddr);
++	snprintf(dirname, PATH_MAX, "%s/%s", get_storage_dir(), srcaddr);
+ 
+ 	dir = opendir(dirname);
+ 	if (!dir) {
+@@ -3536,8 +3537,8 @@ static void load_devices(struct btd_adap
+ 		if (entry->d_type != DT_DIR || bachk(entry->d_name) < 0)
+ 			continue;
+ 
+-		snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", srcaddr,
+-				entry->d_name);
++		snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++				srcaddr, entry->d_name);
+ 
+ 		key_file = g_key_file_new();
+ 		g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -4307,7 +4308,8 @@ static void convert_names_entry(char *ke
+ 	if (bachk(str) != 0)
+ 		return;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", address, str);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			address, str);
+ 	create_file(filename, S_IRUSR | S_IWUSR);
+ 
+ 	key_file = g_key_file_new();
+@@ -4524,7 +4526,7 @@ static void convert_entry(char *key, cha
+ 		struct stat st;
+ 		int err;
+ 
+-		snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s",
++		snprintf(filename, PATH_MAX, "%s/%s/%s", get_storage_dir(),
+ 				converter->address, key);
+ 
+ 		err = stat(filename, &st);
+@@ -4532,7 +4534,7 @@ static void convert_entry(char *key, cha
+ 			return;
+ 	}
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info",
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
+ 			converter->address, key);
+ 
+ 	key_file = g_key_file_new();
+@@ -4560,7 +4562,8 @@ static void convert_file(char *file, cha
+ 	char filename[PATH_MAX];
+ 	struct device_converter converter;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s", address, file);
++	snprintf(filename, PATH_MAX, "%s/%s/%s", get_storage_dir(),
++			address, file);
+ 
+ 	converter.address = address;
+ 	converter.cb = cb;
+@@ -4630,7 +4633,8 @@ static void store_sdp_record(char *local
+ 	char *data;
+ 	gsize length = 0;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", local, peer);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			local, peer);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -4678,7 +4682,8 @@ static void convert_sdp_entry(char *key,
+ 
+ 	/* Check if the device directory has been created as records should
+ 	 * only be converted for known devices */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s", src_addr, dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s", get_storage_dir(),
++			src_addr, dst_addr);
+ 
+ 	err = stat(filename, &st);
+ 	if (err || !S_ISDIR(st.st_mode))
+@@ -4704,8 +4709,8 @@ static void convert_sdp_entry(char *key,
+ 	if (!gatt_parse_record(rec, &uuid, &psm, &start, &end))
+ 		goto failed;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/attributes", src_addr,
+-								dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/attributes",  get_storage_dir(),
++			src_addr, dst_addr);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -4756,8 +4761,8 @@ static void convert_primaries_entry(char
+ 	sdp_uuid16_create(&uuid, GATT_PRIM_SVC_UUID);
+ 	prim_uuid = bt_uuid2string(&uuid);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/attributes", address,
+-									key);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/attributes", get_storage_dir(),
++			address, key);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -4788,7 +4793,8 @@ static void convert_primaries_entry(char
+ 	g_free(data);
+ 	g_key_file_free(key_file);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", address, key);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++			address, key);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -4829,14 +4835,15 @@ static void convert_ccc_entry(char *key,
+ 
+ 	/* Check if the device directory has been created as records should
+ 	 * only be converted for known devices */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s", src_addr, dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s", get_storage_dir(),
++			src_addr, dst_addr);
+ 
+ 	err = stat(filename, &st);
+ 	if (err || !S_ISDIR(st.st_mode))
+ 		return;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/ccc", src_addr,
+-								dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/ccc", get_storage_dir(),
++			src_addr, dst_addr);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -4876,14 +4883,15 @@ static void convert_gatt_entry(char *key
+ 
+ 	/* Check if the device directory has been created as records should
+ 	 * only be converted for known devices */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s", src_addr, dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s", get_storage_dir(),
++			src_addr, dst_addr);
+ 
+ 	err = stat(filename, &st);
+ 	if (err || !S_ISDIR(st.st_mode))
+ 		return;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/gatt", src_addr,
+-								dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/gatt", get_storage_dir(),
++			src_addr, dst_addr);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -4922,14 +4930,15 @@ static void convert_proximity_entry(char
+ 
+ 	/* Check if the device directory has been created as records should
+ 	 * only be converted for known devices */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s", src_addr, key);
++	snprintf(filename, PATH_MAX, "%s/%s/%s", get_storage_dir(),
++			src_addr, key);
+ 
+ 	err = stat(filename, &st);
+ 	if (err || !S_ISDIR(st.st_mode))
+ 		return;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/proximity", src_addr,
+-									key);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/proximity", get_storage_dir(),
++			src_addr, key);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -4953,7 +4962,7 @@ static void convert_device_storage(struc
+ 	ba2str(&adapter->bdaddr, address);
+ 
+ 	/* Convert device's name cache */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/names", address);
++	snprintf(filename, PATH_MAX, "%s/%s/names", get_storage_dir(), address);
+ 	textfile_foreach(filename, convert_names_entry, address);
+ 
+ 	/* Convert aliases */
+@@ -4969,7 +4978,8 @@ static void convert_device_storage(struc
+ 	convert_file("profiles", address, convert_profiles_entry, TRUE);
+ 
+ 	/* Convert primaries */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/primaries", address);
++	snprintf(filename, PATH_MAX, "%s/%s/primaries", get_storage_dir(),
++			address);
+ 	textfile_foreach(filename, convert_primaries_entry, address);
+ 
+ 	/* Convert linkkeys */
+@@ -4985,22 +4995,23 @@ static void convert_device_storage(struc
+ 	convert_file("did", address, convert_did_entry, FALSE);
+ 
+ 	/* Convert sdp */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/sdp", address);
++	snprintf(filename, PATH_MAX, "%s/%s/sdp", get_storage_dir(), address);
+ 	textfile_foreach(filename, convert_sdp_entry, address);
+ 
+ 	/* Convert ccc */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/ccc", address);
++	snprintf(filename, PATH_MAX, "%s/%s/ccc", get_storage_dir(), address);
+ 	textfile_foreach(filename, convert_ccc_entry, address);
+ 
+ 	/* Convert appearances */
+ 	convert_file("appearances", address, convert_appearances_entry, FALSE);
+ 
+ 	/* Convert gatt */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/gatt", address);
++	snprintf(filename, PATH_MAX, "%s/%s/gatt", get_storage_dir(), address);
+ 	textfile_foreach(filename, convert_gatt_entry, address);
+ 
+ 	/* Convert proximity */
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/proximity", address);
++	snprintf(filename, PATH_MAX, "/%s/proximity", get_storage_dir(),
++			address);
+ 	textfile_foreach(filename, convert_proximity_entry, address);
+ }
+ 
+@@ -5016,7 +5027,8 @@ static void convert_config(struct btd_ad
+ 	gsize length = 0;
+ 
+ 	ba2str(&adapter->bdaddr, address);
+-	snprintf(config_path, PATH_MAX, STORAGEDIR "/%s/config", address);
++	snprintf(config_path, PATH_MAX, "%s/%s/config", get_storage_dir(),
++			address);
+ 
+ 	if (read_pairable_timeout(address, &timeout) == 0)
+ 		g_key_file_set_integer(key_file, "General",
+@@ -5050,7 +5062,8 @@ static void fix_storage(struct btd_adapt
+ 
+ 	ba2str(&adapter->bdaddr, address);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/config", address);
++	snprintf(filename, PATH_MAX, "%s/%s/config", get_storage_dir(),
++			address);
+ 	converted = textfile_get(filename, "converted");
+ 	if (!converted)
+ 		return;
+@@ -5059,49 +5072,64 @@ static void fix_storage(struct btd_adapt
+ 
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/names", address);
++	snprintf(filename, PATH_MAX, "%s/%s/names", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/aliases", address);
++	snprintf(filename, PATH_MAX, "%s/%s/aliases", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/trusts", address);
++	snprintf(filename, PATH_MAX, "%s/%s/trusts",  get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/blocked", address);
++	snprintf(filename, PATH_MAX, "%s/%s/blocked", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/profiles", address);
++	snprintf(filename, PATH_MAX, "%s/%s/profiles", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/primaries", address);
++	snprintf(filename, PATH_MAX, "%s/%s/primaries", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/linkkeys", address);
++	snprintf(filename, PATH_MAX, "%s/%s/linkkeys", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/longtermkeys", address);
++	snprintf(filename, PATH_MAX, "%s/%s/longtermkeys", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/classes", address);
++	snprintf(filename, PATH_MAX, "%s/%s/classes", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/did", address);
++	snprintf(filename, PATH_MAX, "%s/%s/did", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/sdp", address);
++	snprintf(filename, PATH_MAX, "%s/%s/sdp", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/ccc", address);
++	snprintf(filename, PATH_MAX, "%s/%s/ccc", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/appearances", address);
++	snprintf(filename, PATH_MAX, "%s/%s/appearances", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/gatt", address);
++	snprintf(filename, PATH_MAX, "%s/%s/gatt", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/proximity", address);
++	snprintf(filename, PATH_MAX, "%s/%s/proximity", get_storage_dir(),
++			address);
+ 	textfile_del(filename, "converted");
+ }
+ 
+@@ -5117,7 +5145,8 @@ static void load_config(struct btd_adapt
+ 
+ 	key_file = g_key_file_new();
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/settings", address);
++	snprintf(filename, PATH_MAX, "%s/%s/settings", get_storage_dir(),
++			address);
+ 
+ 	if (stat(filename, &st) < 0) {
+ 		convert_config(adapter, filename, key_file);
+@@ -6746,8 +6775,8 @@ static void store_link_key(struct btd_ad
+ 	ba2str(btd_adapter_get_address(adapter), adapter_addr);
+ 	ba2str(device_get_address(device), device_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", adapter_addr,
+-								device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++			adapter_addr, device_addr);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -6838,8 +6867,8 @@ static void store_longtermkey(const bdad
+ 	ba2str(local, adapter_addr);
+ 	ba2str(peer, device_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", adapter_addr,
+-								device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++			adapter_addr, device_addr);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -6970,7 +6999,7 @@ static void store_csrk(const bdaddr_t *l
+ 	ba2str(local, adapter_addr);
+ 	ba2str(peer, device_addr);
+ 
+-	snprintf(filename, sizeof(filename), STORAGEDIR "/%s/%s/info",
++	snprintf(filename, sizeof(filename), "%s/%s/%s/info", get_storage_dir(),
+ 						adapter_addr, device_addr);
+ 
+ 	key_file = g_key_file_new();
+@@ -7044,8 +7073,8 @@ static void store_irk(struct btd_adapter
+ 	ba2str(&adapter->bdaddr, adapter_addr);
+ 	ba2str(peer, device_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", adapter_addr,
+-								device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++			adapter_addr, device_addr);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -7134,8 +7163,8 @@ static void store_conn_param(struct btd_
+ 
+ 	DBG("");
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", adapter_addr,
+-								device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++			adapter_addr, device_addr);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+@@ -7716,8 +7745,8 @@ static void remove_keys(struct btd_adapt
+ 	ba2str(btd_adapter_get_address(adapter), adapter_addr);
+ 	ba2str(device_get_address(device), device_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", adapter_addr,
+-								device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++			adapter_addr, device_addr);
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+ 
+Index: bluez-5.37/src/device.c
+===================================================================
+--- bluez-5.37.orig/src/device.c
++++ bluez-5.37/src/device.c
+@@ -386,8 +386,8 @@ static gboolean store_device_info_cb(gpo
+ 
+ 	ba2str(btd_adapter_get_address(device->adapter), adapter_addr);
+ 	ba2str(&device->bdaddr, device_addr);
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info", adapter_addr,
+-			device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/info", get_storage_dir(),
++			adapter_addr, device_addr);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -510,7 +510,8 @@ void device_store_cached_name(struct btd
+ 
+ 	ba2str(btd_adapter_get_address(dev->adapter), s_addr);
+ 	ba2str(&dev->bdaddr, d_addr);
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", s_addr, d_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			s_addr, d_addr);
+ 	create_file(filename, S_IRUSR | S_IWUSR);
+ 
+ 	key_file = g_key_file_new();
+@@ -1933,8 +1934,8 @@ static void store_services(struct btd_de
+ 	ba2str(btd_adapter_get_address(adapter), src_addr);
+ 	ba2str(&device->bdaddr, dst_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/attributes", src_addr,
+-								dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/attributes", get_storage_dir(),
++			src_addr, dst_addr);
+ 	key_file = g_key_file_new();
+ 
+ 	for (l = device->primaries; l; l = l->next) {
+@@ -2107,8 +2108,8 @@ static void store_gatt_db(struct btd_dev
+ 	ba2str(btd_adapter_get_address(adapter), src_addr);
+ 	ba2str(&device->bdaddr, dst_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", src_addr,
+-								dst_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			src_addr, dst_addr);
+ 	create_file(filename, S_IRUSR | S_IWUSR);
+ 
+ 	key_file = g_key_file_new();
+@@ -2654,7 +2655,8 @@ static char *load_cached_name(struct btd
+ 	char *str = NULL;
+ 	int len;
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", local, peer);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			local, peer);
+ 
+ 	key_file = g_key_file_new();
+ 
+@@ -2858,8 +2860,8 @@ static void load_att_info(struct btd_dev
+ 	sdp_uuid16_create(&uuid, GATT_PRIM_SVC_UUID);
+ 	prim_uuid = bt_uuid2string(&uuid);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/attributes", local,
+-			peer);
++	snprintf(filename, PATH_MAX, "%s/%s/%s/attributes", get_storage_dir(),
++			local, peer);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -3183,7 +3185,8 @@ static void load_gatt_db(struct btd_devi
+ 
+ 	DBG("Restoring %s gatt database from file", peer);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", local, peer);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			local, peer);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -3592,10 +3595,11 @@ char *btd_device_get_storage_path(struct
+ 	ba2str(&device->bdaddr, dstaddr);
+ 
+ 	if (!filename)
+-		return g_strdup_printf(STORAGEDIR "/%s/%s", srcaddr, dstaddr);
++		return g_strdup_printf("%s/%s/%s", get_storage_dir(),
++						srcaddr, dstaddr);
+ 
+-	return g_strdup_printf(STORAGEDIR "/%s/%s/%s", srcaddr, dstaddr,
+-							filename);
++	return g_strdup_printf("%s/%s/%s/%s", get_storage_dir(),
++						srcaddr, dstaddr, filename);
+ }
+ 
+ void btd_device_device_set_name(struct btd_device *device, const char *name)
+@@ -3819,12 +3823,12 @@ static void device_remove_stored(struct
+ 	ba2str(src, adapter_addr);
+ 	ba2str(&device->bdaddr, device_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s", adapter_addr,
+-			device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/%s", get_storage_dir(),
++			adapter_addr, device_addr);
+ 	delete_folder_tree(filename);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", adapter_addr,
+-			device_addr);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			adapter_addr, device_addr);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+@@ -4194,14 +4198,14 @@ static void update_bredr_services(struct
+ 	ba2str(btd_adapter_get_address(device->adapter), srcaddr);
+ 	ba2str(&device->bdaddr, dstaddr);
+ 
+-	snprintf(sdp_file, PATH_MAX, STORAGEDIR "/%s/cache/%s", srcaddr,
+-								dstaddr);
++	snprintf(sdp_file, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			srcaddr, dstaddr);
+ 
+ 	sdp_key_file = g_key_file_new();
+ 	g_key_file_load_from_file(sdp_key_file, sdp_file, 0, NULL);
+ 
+-	snprintf(att_file, PATH_MAX, STORAGEDIR "/%s/%s/attributes", srcaddr,
+-								dstaddr);
++	snprintf(att_file, PATH_MAX, "%s/%s/%s/attributes", get_storage_dir(),
++			srcaddr, dstaddr);
+ 
+ 	att_key_file = g_key_file_new();
+ 	g_key_file_load_from_file(att_key_file, att_file, 0, NULL);
+@@ -5887,7 +5891,8 @@ static sdp_list_t *read_device_records(s
+ 	ba2str(btd_adapter_get_address(device->adapter), local);
+ 	ba2str(&device->bdaddr, peer);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", local, peer);
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s", get_storage_dir(),
++			local, peer);
+ 
+ 	key_file = g_key_file_new();
+ 	g_key_file_load_from_file(key_file, filename, 0, NULL);
+Index: bluez-5.37/src/storage.c
+===================================================================
+--- bluez-5.37.orig/src/storage.c
++++ bluez-5.37/src/storage.c
+@@ -55,6 +55,16 @@ struct match {
+ 	char *pattern;
+ };
+ 
++const char* get_storage_dir(void)
++{
++	static char *storagedir = NULL;
++
++	if (!storagedir)
++		storagedir = getenv("SNAP_APP_DATA_PATH");
++
++	return storagedir ? storagedir : STORAGEDIR;
++}
++
+ static inline int create_filename(char *buf, size_t size,
+ 				const bdaddr_t *bdaddr, const char *name)
+ {
+@@ -62,14 +72,14 @@ static inline int create_filename(char *
+ 
+ 	ba2str(bdaddr, addr);
+ 
+-	return create_name(buf, size, STORAGEDIR, addr, name);
++	return create_name(buf, size, get_storage_dir(), addr, name);
+ }
+ 
+ int read_discoverable_timeout(const char *src, int *timeout)
+ {
+ 	char filename[PATH_MAX], *str;
+ 
+-	create_name(filename, PATH_MAX, STORAGEDIR, src, "config");
++	create_name(filename, PATH_MAX, get_storage_dir(), src, "config");
+ 
+ 	str = textfile_get(filename, "discovto");
+ 	if (!str)
+@@ -89,7 +99,7 @@ int read_pairable_timeout(const char *sr
+ {
+ 	char filename[PATH_MAX], *str;
+ 
+-	create_name(filename, PATH_MAX, STORAGEDIR, src, "config");
++	create_name(filename, PATH_MAX, get_storage_dir(), src, "config");
+ 
+ 	str = textfile_get(filename, "pairto");
+ 	if (!str)
+@@ -109,7 +119,7 @@ int read_on_mode(const char *src, char *
+ {
+ 	char filename[PATH_MAX], *str;
+ 
+-	create_name(filename, PATH_MAX, STORAGEDIR, src, "config");
++	create_name(filename, PATH_MAX, get_storage_dir(), src, "config");
+ 
+ 	str = textfile_get(filename, "onmode");
+ 	if (!str)
+Index: bluez-5.37/src/storage.h
+===================================================================
+--- bluez-5.37.orig/src/storage.h
++++ bluez-5.37/src/storage.h
+@@ -21,6 +21,7 @@
+  *
+  */
+ 
++const char *get_storage_dir(void);
+ int read_discoverable_timeout(const char *src, int *timeout);
+ int read_pairable_timeout(const char *src, int *timeout);
+ int read_on_mode(const char *src, char *mode, int length);
