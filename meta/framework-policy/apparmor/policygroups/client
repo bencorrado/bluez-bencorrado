@@ -1,0 +1,26 @@
+# Description: Allow using bluez service. Reserved because this gives
+#  privileged access to the bluez service.
+# Usage: reserved
+
+#include <abstractions/dbus-strict>
+
+# Allow all access to bluez service
+dbus (receive, send)
+    bus=system
+    peer=(label=bluez_bluez_*),
+
+dbus (send)
+    bus=system
+    peer=(name=org.bluez, label=unconfined),
+
+dbus (receive)
+    bus=system
+    path=/
+    interface=org.freedesktop.DBus.ObjectManager
+    peer=(label=unconfined),
+
+dbus (receive)
+    bus=system
+    path=/org/bluez{,/**}
+    interface=org.freedesktop.DBus.*
+    peer=(label=unconfined),
