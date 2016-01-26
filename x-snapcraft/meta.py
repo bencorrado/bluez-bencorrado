@@ -119,7 +119,9 @@ def _compose_snap_yaml(meta_dir, config_data):
         snap_yaml[key_name] = config_data[key_name]
 
     for key_name in _OPTIONAL_PACKAGE_KEYS:
-        if key_name in config_data:
+        if key_name == "type":
+            snap_yaml[key_name] = "framework"
+        elif key_name in config_data:
             snap_yaml[key_name] = config_data[key_name]
 
     if 'apps' in config_data:
