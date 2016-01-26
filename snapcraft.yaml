@@ -10,6 +10,8 @@ project distributed under GNU General Public License (GPL)."
 apps:
   bluetoothctl:
     command: usr/bin/bluetoothctl
+    caps:
+      - bluez_client
   bluez:
     command: "usr/libexec/bluetooth/bluetoothd -E"
     daemon: simple
