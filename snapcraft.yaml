@@ -13,7 +13,7 @@ apps:
     caps:
       - bluez_client
   bluez:
-    command: "usr/libexec/bluetooth/bluetoothd -E"
+    command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
     security-policy: 
       apparmor: bluez.apparmor
@@ -26,6 +26,7 @@ parts:
     source-tag: "5.37"
     configflags:
       - --prefix=/usr
+      - --libexec=/usr/lib/
       - --enable-experimental
       - --enable-snappy
       - --enable-threads
@@ -42,7 +43,7 @@ parts:
       - libglib2.0-dev
       - libdbus-1-dev
     snap:
-      - usr/libexec/bluetooth/bluetoothd
+      - usr/lib/bluetooth/bluetoothd
       - usr/bin/bluetoothctl
   dbus-configuration:
     plugin: copy
