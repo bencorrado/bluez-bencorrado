@@ -48,18 +48,16 @@ parts:
     stage-packages:
       - libglib2.0-dev
       - libdbus-1-dev
+      - libical1a 
+    filesets:
+      libical1a:
+        - usr/lib/*/libical*
     snap:
       - usr/lib/bluetooth/bluetoothd
       - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
       - usr/share/doc/libical1a/copyright
-      - usr/lib/libicalvcal.so.1.0.1
-      - usr/lib/libicalvcal.so.1
-      - usr/lib/libical.so.1.0.1
-      - usr/lib/libical.so.1
-      - usr/lib/libicalss.so.1.0.1
-      - usr/lib/libicalss.so.1
-					      
+      - $libical1a
   dbus-configuration:
     plugin: copy
     files: 
