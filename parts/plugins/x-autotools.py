@@ -82,9 +82,11 @@ class AutotoolsPlugin(snapcraft.BasePlugin):
                 self.run(['env', 'NOCONFIGURE=1', './autogen.sh'])
             else:
                 self.run(['autoreconf', '-i'])
+
         self.run(['pwd'])
         os.environ['QUILT_PATCHES'] = '../../../patches'
         self.run(['quilt', 'push', '-a'])
+
         self.run(['./configure', '--prefix='] + self.options.configflags)
-        self.run(['make', 'install', 'DESTDIR=' + self.installdir])
+        self.run(['make'])
         self.run(['make', 'install', 'DESTDIR=' + self.installdir])
