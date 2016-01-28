@@ -65,4 +65,4 @@ parts:
     files: 
       conf/bluez-dbus.conf: conf/bluez-dbus.conf
       meta/framework-policy: meta/framework-policy
-      copyright: usr/share/doc/copyright
+      copyright: usr/share/doc/bluez/copyright
