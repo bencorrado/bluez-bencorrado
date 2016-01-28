@@ -15,7 +15,7 @@ apps:
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
-    security-policy: 
+    security-policy:
       apparmor: bluez.apparmor
       seccomp: bluez.seccomp
   obex:
@@ -24,7 +24,7 @@ apps:
     security-policy:
       apparmor: obex.apparmor
       seccomp: obex.seccomp
-     
+
 parts:
   bluez:
     plugin: autotools
