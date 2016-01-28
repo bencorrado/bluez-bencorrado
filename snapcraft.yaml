@@ -38,7 +38,7 @@ parts:
       - --enable-threads
       - --disable-cups
       - --disable-monitor
-      - --disable-obex
+      - --enable-obex
       - --disable-systemd
       - --disable-silent-rules
     build-packages:
