@@ -18,6 +18,12 @@ apps:
     security-policy: 
       apparmor: bluez.apparmor
       seccomp: bluez.seccomp
+  obex:
+    command: "usr/lib/bluetooth/obexd"
+    daemon: simple
+    security-policy:
+      apparmor: obex.apparmor
+      seccomp: obex.seccomp
      
 parts:
   bluez:
@@ -44,7 +50,16 @@ parts:
       - libdbus-1-dev
     snap:
       - usr/lib/bluetooth/bluetoothd
+      - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
+      - usr/share/doc/libical1a/copyright
+      - usr/lib/libicalvcal.so.1.0.1
+      - usr/lib/libicalvcal.so.1
+      - usr/lib/libical.so.1.0.1
+      - usr/lib/libical.so.1
+      - usr/lib/libicalss.so.1.0.1
+      - usr/lib/libicalss.so.1
+					      
   dbus-configuration:
     plugin: copy
     files: 
