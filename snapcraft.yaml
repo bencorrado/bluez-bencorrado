@@ -42,9 +42,11 @@ parts:
       - --disable-systemd
       - --disable-silent-rules
     build-packages:
+      - libical-dev
       - libreadline6-dev    
       - libudev-dev
       - pkg-config
+      - quilt
     stage-packages:
       - libglib2.0-dev
       - libdbus-1-dev
