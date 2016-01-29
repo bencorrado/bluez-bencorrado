@@ -18,6 +18,10 @@ apps:
     security-policy:
       apparmor: bluez.apparmor
       seccomp: bluez.seccomp
+  obexctl:
+    command: usr/bin/obexctl
+    caps:
+      - bluez_client
   obex:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
@@ -58,6 +62,7 @@ parts:
       - usr/lib/bluetooth/bluetoothd
       - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
+      - usr/bin/obexctl
       - usr/share/doc/libical1a/copyright
       - $libical1a
   dbus-configuration:
