@@ -1,7 +1,7 @@
-Index: bluez-5.37/src/adapter.c
+Index: build/src/adapter.c
 ===================================================================
---- bluez-5.37.orig/src/adapter.c
-+++ bluez-5.37/src/adapter.c
+--- build.orig/src/adapter.c
++++ build/src/adapter.c
 @@ -456,7 +456,8 @@ static void store_adapter_info(struct bt
  							adapter->stored_alias);
  
@@ -221,7 +221,7 @@ Index: bluez-5.37/src/adapter.c
  
  	/* Convert proximity */
 -	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/proximity", address);
-+	snprintf(filename, PATH_MAX, "/%s/proximity", get_storage_dir(),
++	snprintf(filename, PATH_MAX, "%s/%s/proximity", get_storage_dir(),
 +			address);
  	textfile_foreach(filename, convert_proximity_entry, address);
  }
@@ -400,10 +400,10 @@ Index: bluez-5.37/src/adapter.c
  	key_file = g_key_file_new();
  	g_key_file_load_from_file(key_file, filename, 0, NULL);
  
-Index: bluez-5.37/src/device.c
+Index: build/src/device.c
 ===================================================================
---- bluez-5.37.orig/src/device.c
-+++ bluez-5.37/src/device.c
+--- build.orig/src/device.c
++++ build/src/device.c
 @@ -386,8 +386,8 @@ static gboolean store_device_info_cb(gpo
  
  	ba2str(btd_adapter_get_address(device->adapter), adapter_addr);
@@ -539,10 +539,10 @@ Index: bluez-5.37/src/device.c
  
  	key_file = g_key_file_new();
  	g_key_file_load_from_file(key_file, filename, 0, NULL);
-Index: bluez-5.37/src/storage.c
+Index: build/src/storage.c
 ===================================================================
---- bluez-5.37.orig/src/storage.c
-+++ bluez-5.37/src/storage.c
+--- build.orig/src/storage.c
++++ build/src/storage.c
 @@ -55,6 +55,16 @@ struct match {
  	char *pattern;
  };
@@ -595,10 +595,10 @@ Index: bluez-5.37/src/storage.c
  
  	str = textfile_get(filename, "onmode");
  	if (!str)
-Index: bluez-5.37/src/storage.h
+Index: build/src/storage.h
 ===================================================================
---- bluez-5.37.orig/src/storage.h
-+++ bluez-5.37/src/storage.h
+--- build.orig/src/storage.h
++++ build/src/storage.h
 @@ -21,6 +21,7 @@
   *
   */
