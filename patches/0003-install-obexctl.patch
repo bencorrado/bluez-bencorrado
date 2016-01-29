@@ -1,0 +1,17 @@
+Index: build/Makefile.tools
+===================================================================
+--- build.orig/Makefile.tools
++++ build/Makefile.tools
+@@ -340,9 +340,11 @@ EXTRA_DIST += tools/btattach.1
+ endif
+ 
+ if READLINE
++bin_PROGRAMS += tools/obexctl
++
+ noinst_PROGRAMS += attrib/gatttool tools/btmgmt \
+ 			tools/obex-client-tool tools/obex-server-tool \
+-			tools/bluetooth-player tools/obexctl
++			tools/bluetooth-player
+ 
+ attrib_gatttool_SOURCES = attrib/gatttool.c attrib/att.c attrib/gatt.c \
+ 				attrib/gattrib.c btio/btio.c \

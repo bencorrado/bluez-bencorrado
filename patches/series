@@ -1,3 +1,4 @@
 0001-add-snappy-runtime-storage-dir-support.patch
 0002-make-obex-use-system-bus.patch
 
+0003-install-obexctl.patch
