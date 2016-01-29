@@ -195,6 +195,12 @@
     interface=org.freedesktop.DBus.Properties
     peer=(label=unconfined),
 
+  dbus (send)
+    bus=system
+    path=/org/freedesktop/*
+    interface=org.freedesktop.DBus.ObjectManager
+    peer=(label=unconfined),
+
   # Allow binding the service to the requested connection name
   dbus (bind)
       bus=system
