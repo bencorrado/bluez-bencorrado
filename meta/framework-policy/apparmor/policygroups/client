@@ -13,6 +13,10 @@ dbus (send)
     bus=system
     peer=(name=org.bluez, label=unconfined),
 
+dbus (send)
+    bus=system
+    peer=(name=org.bluez.obex, label=unconfined),
+
 dbus (receive)
     bus=system
     path=/
