@@ -69,6 +69,11 @@ class AutotoolsPlugin(snapcraft.BasePlugin):
 
     def build(self):
         super().build()
+
+        self.run(['pwd'])
+        os.environ['QUILT_PATCHES'] = '../../../patches'
+        self.run(['quilt', 'push', '-a'])
+        
         if not os.path.exists(os.path.join(self.builddir, "configure")):
             autogen_path = os.path.join(self.builddir, "autogen.sh")
             if os.path.exists(autogen_path):
@@ -82,10 +87,6 @@ class AutotoolsPlugin(snapcraft.BasePlugin):
                 self.run(['env', 'NOCONFIGURE=1', './autogen.sh'])
             else:
                 self.run(['autoreconf', '-i'])
-
-        self.run(['pwd'])
-        os.environ['QUILT_PATCHES'] = '../../../patches'
-        self.run(['quilt', 'push', '-a'])
 
         self.run(['./configure', '--prefix='] + self.options.configflags)
         self.run(['make'])
