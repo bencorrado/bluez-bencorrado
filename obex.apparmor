@@ -26,21 +26,21 @@
   @{CLICK_DIR}/@{APP_PKGNAME}/@{APP_VERSION}/**  mrklix,
 
   # Read-only home area for other versions
-  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/                  r,
-  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/   r,
-  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/** mrkix,
+  owner @{HOMEDIRS}/*/snaps/@{APP_PKGNAME}/                  r,
+  owner @{HOMEDIRS}/*/snaps/@{APP_PKGNAME}/@{APP_VERSION}/   r,
+  owner @{HOMEDIRS}/*/snaps/@{APP_PKGNAME}/@{APP_VERSION}/** mrkix,
 
   # Writable home area for this version.
-  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/   w,
-  owner @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/@{APP_VERSION}/** wl,
+  owner @{HOMEDIRS}/*/snaps/@{APP_PKGNAME}/@{APP_VERSION}/   w,
+  owner @{HOMEDIRS}/*/snaps/@{APP_PKGNAME}/@{APP_VERSION}/** wl,
 
   # Read-only system area for other versions
-  /var/lib/apps/@{APP_PKGNAME}/   r,
-  /var/lib/apps/@{APP_PKGNAME}/** mrkix,
+  /var/lib/snaps/@{APP_PKGNAME}/   r,
+  /var/lib/snaps/@{APP_PKGNAME}/** mrkix,
 
   # Writable system area only for this version
-  /var/lib/apps/@{APP_PKGNAME}/@{APP_VERSION}/   w,
-  /var/lib/apps/@{APP_PKGNAME}/@{APP_VERSION}/** wl,
+  /var/lib/snaps/@{APP_PKGNAME}/@{APP_VERSION}/   w,
+  /var/lib/snaps/@{APP_PKGNAME}/@{APP_VERSION}/** wl,
 
   # The ubuntu-core-launcher creates an app-specific private restricted /tmp
   # and will fail to launch the app if something goes wrong. As such, we can
