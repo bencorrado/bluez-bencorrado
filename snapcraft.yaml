@@ -12,16 +12,16 @@ apps:
     command: usr/bin/bluetoothctl
     caps:
       - bluez_client
+  obexctl:
+    command: usr/bin/obexctl
+    caps:
+      - bluez_client
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
     security-policy:
       apparmor: bluez.apparmor
       seccomp: bluez.seccomp
-  obexctl:
-    command: usr/bin/obexctl
-    caps:
-      - bluez_client
   obex:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
