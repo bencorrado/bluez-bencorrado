@@ -1,5 +1,5 @@
 #
-# AppArmor confinement for bluez
+# AppArmor confinement for bluez obexd
 #
 
 #include <tunables/global>
@@ -9,6 +9,7 @@
 
 ###PROFILEATTACH### (attach_disconnected) {
   #include <abstractions/base>
+  #include <abstractions/nameservice>
   #include <abstractions/openssl>
 
   # Explicitly deny ptrace for now since it can be abused to break out of the
