@@ -1,5 +1,5 @@
 #
-# AppArmor confinement for bluez
+# AppArmor confinement for bluez's bluetoothd
 #
 
 #include <tunables/global>
