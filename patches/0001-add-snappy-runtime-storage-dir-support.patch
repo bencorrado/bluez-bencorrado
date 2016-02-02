@@ -607,3 +607,19 @@ Index: build/src/storage.h
  int read_discoverable_timeout(const char *src, int *timeout);
  int read_pairable_timeout(const char *src, int *timeout);
  int read_on_mode(const char *src, char *mode, int length);
+Index: build/profiles/input/device.c
+===================================================================
+--- build.orig/profiles/input/device.c
++++ build/profiles/input/device.c
+@@ -937,8 +937,9 @@ static int hidp_add_connection(struct in
+ 	ba2str(&idev->src, src_addr);
+ 	ba2str(&idev->dst, dst_addr);
+ 
+-	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", src_addr,
+-								dst_addr);
++	snprintf(filename, PATH_MAX, STORAGEDIR "%s/%s/cache/%s",
++			get_storage_dir(), src_addr, dst_addr);
++
+ 	sprintf(handle, "0x%8.8X", idev->handle);
+ 
+ 	key_file = g_key_file_new();
