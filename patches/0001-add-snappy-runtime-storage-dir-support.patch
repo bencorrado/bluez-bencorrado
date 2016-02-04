@@ -552,7 +552,7 @@ Index: build/src/storage.c
 +	static char *storagedir = NULL;
 +
 +	if (!storagedir)
-+		storagedir = getenv("SNAP_APP_DATA_PATH");
++		storagedir = getenv("SNAP_DATA");
 +
 +	return storagedir ? storagedir : STORAGEDIR;
 +}
@@ -623,3 +623,29 @@ Index: build/profiles/input/device.c
  	sprintf(handle, "0x%8.8X", idev->handle);
  
  	key_file = g_key_file_new();
+Index: build/obexd/src/main.c
+===================================================================
+--- build.orig/obexd/src/main.c
++++ build/obexd/src/main.c
+@@ -285,11 +285,19 @@ int main(int argc, char *argv[])
+ 	}
+ 
+ 	if (option_root == NULL) {
+-		option_root = g_build_filename(g_get_user_cache_dir(), "obexd",
+-									NULL);
++		option_root = getenv("SNAP_USER_DATA");
++
++		if (!option_root)
++			option_root = g_build_filename(g_get_user_cache_dir(),
++							"obexd", NULL);
+ 		g_mkdir_with_parents(option_root, 0700);
+ 	}
+ 
++	/* 
++	 * FIXME: a relative path option_root is specified on the command line,
++	 * will not be propertly re-located to $SNAP_USER_DATA.  Since this is
++	 * not used in the snap's obexd service file, this should be a no-op.
++	 */
+ 	if (option_root[0] != '/') {
+ 		const char *home = getenv("HOME");
+ 		if (home) {
