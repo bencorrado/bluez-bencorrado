@@ -617,7 +617,7 @@ Index: build/profiles/input/device.c
  
 -	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s", src_addr,
 -								dst_addr);
-+	snprintf(filename, PATH_MAX, STORAGEDIR "%s/%s/cache/%s",
++	snprintf(filename, PATH_MAX, "%s/%s/cache/%s",
 +			get_storage_dir(), src_addr, dst_addr);
 +
  	sprintf(handle, "0x%8.8X", idev->handle);
@@ -641,7 +641,7 @@ Index: build/obexd/src/main.c
  		g_mkdir_with_parents(option_root, 0700);
  	}
  
-+	/* 
++	/*
 +	 * FIXME: a relative path option_root is specified on the command line,
 +	 * will not be propertly re-located to $SNAP_USER_DATA.  Since this is
 +	 * not used in the snap's obexd service file, this should be a no-op.
