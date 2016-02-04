@@ -79,3 +79,4 @@ parts:
       conf/bluez-dbus.conf: conf/bluez-dbus.conf
       meta/framework-policy: meta/framework-policy
       copyright: usr/share/doc/bluez/copyright
+      doc/overview.md: usr/share/doc/bluez/overview.md
