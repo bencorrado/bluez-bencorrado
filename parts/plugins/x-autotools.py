@@ -55,6 +55,21 @@ class AutotoolsPlugin(snapcraft.BasePlugin):
             'default': [],
         }
 
+        schema['properties']['install-via'] = {
+            'enum': ['destdir', 'prefix'],
+            'default': 'destdir',
+        }
+
+        schema['properties']['patches-dir'] = {
+            'type': 'string',
+            'default': 'patches',
+        }
+
+        schema['properties']['force-autogen'] = {
+            'type': 'boolean',
+            'default': 'true',
+        }
+
         return schema
 
     def __init__(self, name, options):
@@ -65,16 +80,27 @@ class AutotoolsPlugin(snapcraft.BasePlugin):
             'autopoint',
             'libtool',
             'make',
+            'quilt',
         ])
+
+        if options.install_via == 'destdir':
+            self.install_via_destdir = True
+        elif options.install_via == 'prefix':
+            self.install_via_destdir = False
+        else:
+            raise RuntimeError('Unsupported installation method: "{}"'.format(
+                options.install_via))
 
     def build(self):
         super().build()
 
-        self.run(['pwd'])
-        os.environ['QUILT_PATCHES'] = '../../../patches'
-        self.run(['quilt', 'push', '-a'])
-        
-        if not os.path.exists(os.path.join(self.builddir, "configure")):
+        patchdir = os.path.join(self.builddir, "../../..", self.options.patches_dir)
+
+        if os.path.exists(patchdir):
+            os.environ['QUILT_PATCHES'] = patchdir
+            self.run(['quilt', 'push', '-a'])
+
+        if not os.path.exists(os.path.join(self.builddir, "configure")) or self.options.force_autogen:
             autogen_path = os.path.join(self.builddir, "autogen.sh")
             if os.path.exists(autogen_path):
                 # Make sure it's executable
@@ -88,6 +114,17 @@ class AutotoolsPlugin(snapcraft.BasePlugin):
             else:
                 self.run(['autoreconf', '-i'])
 
-        self.run(['./configure', '--prefix='] + self.options.configflags)
-        self.run(['make'])
-        self.run(['make', 'install', 'DESTDIR=' + self.installdir])
+        configure_command = ['./configure']
+        make_install_command = ['make', 'install']
+
+        if self.install_via_destdir:
+            # Use an empty prefix since we'll install via DESTDIR
+            configure_command.append('--prefix=')
+            make_install_command.append('DESTDIR=' + self.installdir)
+        else:
+            configure_command.append('--prefix=' + self.installdir)
+
+        self.run(configure_command + self.options.configflags)
+        self.run(['make', '-j{}'.format(
+            snapcraft.common.get_parallel_build_count())])
+        self.run(make_install_command)
