@@ -32,8 +32,8 @@ uses:
       apparmor: bluez.apparmor
       seccomp: bluez.seccomp
   obex-service:
-    type: migration-skill  
-    security-policy:  
+    type: migration-skill
+    security-policy:
       apparmor: obex.apparmor
       seccomp: obex.seccomp
 
@@ -53,15 +53,15 @@ parts:
       - --disable-systemd
       - --disable-silent-rules
     build-packages:
+      - libglib2.0-dev
+      - libdbus-1-dev
       - libical-dev
-      - libreadline6-dev    
+      - libreadline6-dev
       - libudev-dev
       - pkg-config
       - quilt
     stage-packages:
-      - libglib2.0-dev
-      - libdbus-1-dev
-      - libical1a 
+      - libical1a
     filesets:
       libical1a:
         - usr/lib/*/libical*
