@@ -40,8 +40,7 @@ uses:
 parts:
   bluez:
     plugin: autotools
-    source: git://git.kernel.org/pub/scm/bluetooth/bluez.git
-    source-tag: "5.37"
+    source: https://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
     configflags:
       - --prefix=/usr
       - --libexec=/usr/lib/
