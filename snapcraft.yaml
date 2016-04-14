@@ -1,6 +1,5 @@
 name: bluez
 version: 5.37-1
-icon: icon.png
 type: app
 summary: Bluetooth tools and daemons
 description: "This package contains tools and system daemons for using Bluetooth
@@ -13,7 +12,7 @@ apps:
     uses: [bluez-client]
   obexctl:
     command: usr/bin/obexctl
-    uses: [bluez-client]    
+    uses: [bluez-client]
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
