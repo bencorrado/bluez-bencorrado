@@ -9,23 +9,23 @@ project distributed under GNU General Public License (GPL)."
 apps:
   bluetoothctl:
     command: usr/bin/bluetoothctl
-    plugs: [bluez-client]
+    plugs: [client]
   obexctl:
     command: usr/bin/obexctl
-    plugs: [bluez-client]
+    plugs: [client]
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
-    slots: [bluez-service]
+    slots: [service]
   obex:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
-    slots: [bluez-service]
+    slots: [service]
 plugs:
-  bluez-client:
+  client:
       interface: bluez
 slots:
-  bluez-service:
+  service:
       interface: bluez
 
 parts:
