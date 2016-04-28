@@ -49,6 +49,7 @@ parts:
       - libical-dev
       - libreadline6-dev
       - libudev-dev
+      - udev
       - pkg-config
       - quilt
     stage-packages:
