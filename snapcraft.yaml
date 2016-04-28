@@ -1,6 +1,5 @@
 name: bluez
 version: 5.37-1
-icon: icon.png
 type: app
 summary: Bluetooth tools and daemons
 description: "This package contains tools and system daemons for using Bluetooth
@@ -13,7 +12,7 @@ apps:
     uses: [bluez-client]
   obexctl:
     command: usr/bin/obexctl
-    uses: [bluez-client]    
+    uses: [bluez-client]
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
@@ -32,16 +31,15 @@ uses:
       apparmor: bluez.apparmor
       seccomp: bluez.seccomp
   obex-service:
-    type: migration-skill  
-    security-policy:  
+    type: migration-skill
+    security-policy:
       apparmor: obex.apparmor
       seccomp: obex.seccomp
 
 parts:
   bluez:
     plugin: autotools
-    source: git://git.kernel.org/pub/scm/bluetooth/bluez.git
-    source-tag: "5.37"
+    source: https://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
     configflags:
       - --prefix=/usr
       - --libexec=/usr/lib/
@@ -54,15 +52,15 @@ parts:
       - --disable-systemd
       - --disable-silent-rules
     build-packages:
+      - libglib2.0-dev
+      - libdbus-1-dev
       - libical-dev
-      - libreadline6-dev    
+      - libreadline6-dev
       - libudev-dev
       - pkg-config
       - quilt
     stage-packages:
-      - libglib2.0-dev
-      - libdbus-1-dev
-      - libical1a 
+      - libical1a
     filesets:
       libical1a:
         - usr/lib/*/libical*
