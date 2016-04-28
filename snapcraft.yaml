@@ -9,32 +9,24 @@ project distributed under GNU General Public License (GPL)."
 apps:
   bluetoothctl:
     command: usr/bin/bluetoothctl
-    uses: [bluez-client]
+    plugs: [client]
   obexctl:
     command: usr/bin/obexctl
-    uses: [bluez-client]
+    plugs: [client]
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
-    uses: [bluez-service]
+    slots: [service]
   obex:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
-    uses: [obex-service]
-uses:
-  bluez-client:
-    type: migration-skill
-    caps: [bluez_client]
-  bluez-service:
-    type: migration-skill
-    security-policy:
-      apparmor: bluez.apparmor
-      seccomp: bluez.seccomp
-  obex-service:
-    type: migration-skill
-    security-policy:
-      apparmor: obex.apparmor
-      seccomp: obex.seccomp
+    slots: [service]
+plugs:
+  client:
+      interface: bluez
+slots:
+  service:
+      interface: bluez
 
 parts:
   bluez:
@@ -74,7 +66,5 @@ parts:
   dbus-configuration:
     plugin: copy
     files: 
-      conf/bluez-dbus.conf: conf/bluez-dbus.conf
-      meta/framework-policy: meta/framework-policy
       copyright: usr/share/doc/bluez/copyright
       doc/overview.md: usr/share/doc/bluez/overview.md
