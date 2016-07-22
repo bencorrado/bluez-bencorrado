@@ -70,6 +70,6 @@ parts:
       - $libical1a
   dbus-configuration:
     plugin: copy
-    files: 
+    files:
       copyright: usr/share/doc/bluez/copyright
       doc/overview.md: usr/share/doc/bluez/overview.md
