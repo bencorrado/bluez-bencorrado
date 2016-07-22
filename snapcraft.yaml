@@ -35,7 +35,9 @@ slots:
 parts:
   bluez:
     plugin: autotools
-    source: https://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
+    source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
+    source-type: git
+    source-branch: bluez/5.37
     configflags:
       - --prefix=/usr
       - --libexec=/usr/lib/
