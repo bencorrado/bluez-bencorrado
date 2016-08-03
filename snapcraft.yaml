@@ -42,7 +42,6 @@ parts:
       - --prefix=/usr
       - --libexec=/usr/lib/
       - --enable-experimental
-      - --enable-snappy
       - --enable-threads
       - --disable-cups
       - --disable-monitor
@@ -57,7 +56,6 @@ parts:
       - libudev-dev
       - udev
       - pkg-config
-      - quilt
     stage-packages:
       - libical1a
     filesets:
