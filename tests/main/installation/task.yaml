@@ -1,10 +1,7 @@
 summary: Test bluez snap installation was successful
 
 execute: |
-    . $TESTSLIB/utilities.sh
-
     # Service should be up an running
-    wait_for_bluez
     systemctl status snap.bluez.bluez | grep -Pzq ': active'
 
     # Ensure all necessary plugs/slots are connected
