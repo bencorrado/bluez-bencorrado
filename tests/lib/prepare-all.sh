@@ -6,6 +6,12 @@ if [ -n "$SNAP_CHANNEL" ] ; then
 	exit 0
 fi
 
+# If there is a network-manager snap prebuilt for us, lets take
+# that one to speed things up.
+if [ -e /home/bluez/bluez_*_amd64.snap ] ; then
+	exit 0
+fi
+
 # Setup classic snap and build the bluez snap in there
 snap install --devmode --beta classic
 cat <<-EOF > /home/test/build-snap.sh
