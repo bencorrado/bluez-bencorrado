@@ -35,6 +35,9 @@ path: /home/bluez
 exclude:
   - .git
 
+prepare: |
+  . $TESTSLIB/prepare-all.sh
+
 suites:
     tests/main/:
         summary: Full-system tests for BlueZ
