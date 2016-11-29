@@ -38,7 +38,10 @@ if [ -n "$SNAP_CHANNEL" ] ; then
 		snap install --$SNAP_CHANNEL bluez
 	fi
 else
-	# Install prebuilt bluez snap
+	# Install prebuilt bluez snap but first install from the store
+	# to work around the fact that we are not allowed anymore to
+	# connect bluez slot to a snap installed with --dangerous
+	snap install bluez
 	snap install --dangerous /home/bluez/bluez_*_amd64.snap
 	# As we have a snap which we build locally its unasserted and therefor
 	# we don't have any snap-declarations in place and need to manually
