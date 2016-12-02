@@ -1,0 +1,8 @@
+summary: Test bluetoothctl can communicate with the bluez daemon
+
+execute: |
+    /snap/bin/bluez.bluetoothctl <<EOF
+    list
+    exit
+    EOF
+
