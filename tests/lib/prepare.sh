@@ -43,10 +43,6 @@ else
 	# connect bluez slot to a snap installed with --dangerous
 	snap install bluez
 	snap install --dangerous /home/bluez/bluez_*_amd64.snap
-	# As we have a snap which we build locally its unasserted and therefor
-	# we don't have any snap-declarations in place and need to manually
-	# connect all plugs.
-	snap connect bluez:client bluez:service
 fi
 
 # Snapshot of the current snapd state for a later restore
