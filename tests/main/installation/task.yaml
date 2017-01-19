@@ -6,3 +6,4 @@ execute: |
 
     # Ensure all necessary plugs/slots are connected
     snap interfaces | grep -Pzq "bluez:service +bluez:client"
+    snap interfaces | grep -Pzq ":uhid +bluez"
