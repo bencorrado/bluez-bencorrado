@@ -14,7 +14,7 @@ grade: stable
 apps:
   bluetoothctl:
     command: usr/bin/bluetoothctl
-    plugs: [client]
+    plugs: [client, uhid]
     aliases:
       - bluetoothctl
   obexctl:
