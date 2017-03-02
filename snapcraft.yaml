@@ -73,8 +73,11 @@ parts:
       - usr/bin/obexctl
       - usr/share/doc/libical1a/copyright
       - $libical1a
-  dbus-configuration:
-    plugin: copy
-    files:
+  common:
+    plugin: dump
+    organize:
       copyright: usr/share/doc/bluez/copyright
       doc/overview.md: usr/share/doc/bluez/overview.md
+    prime:
+      - usr/share/doc/bluez/copyright
+      - usr/share/doc/bluez/overview.md
