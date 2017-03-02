@@ -33,15 +33,23 @@ apps:
   hciconfig:
     command: usr/bin/hciconfig
     plugs: [bluetooth-control]
+    aliases:
+      - hciconfig
   hcidump:
     command: usr/bin/hcidump
     plugs: [bluetooth-control]
+    aliases:
+      - hcidump
   hciattach:
     command: usr/bin/hciattach
     plugs: [bluetooth-control]
+    aliases:
+      - hciattach
   hcitool:
     command: usr/bin/hcitool
     plugs: [bluetooth-control]
+    aliases:
+      - hcitool
 
 plugs:
   client:
