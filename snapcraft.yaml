@@ -30,6 +30,18 @@ apps:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
     slots: [service]
+  hciconfig:
+    command: usr/bin/hciconfig
+    plugs: [bluetooth-control]
+  hcidump:
+    command: usr/bin/hcidump
+    plugs: [bluetooth-control]
+  hciattach:
+    command: usr/bin/hciattach
+    plugs: [bluetooth-control]
+  hcitool:
+    command: usr/bin/hcitool
+    plugs: [bluetooth-control]
 
 plugs:
   client:
@@ -72,6 +84,10 @@ parts:
       - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
       - usr/bin/obexctl
+      - usr/bin/hciconfig
+      - usr/bin/hcidump
+      - usr/bin/hciattach
+      - usr/bin/hcitool
       - usr/share/doc/libical1a/copyright
       - $libical1a
   common:
