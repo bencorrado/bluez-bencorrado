@@ -14,9 +14,13 @@ apps:
   bluetoothctl:
     command: usr/bin/bluetoothctl
     plugs: [client]
+    aliases:
+      - bluetoothctl
   obexctl:
     command: usr/bin/obexctl
     plugs: [client]
+    aliases:
+      - obexctl
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
@@ -25,6 +29,7 @@ apps:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
     slots: [service]
+
 plugs:
   client:
       interface: bluez
