@@ -19,8 +19,10 @@ environment:
     PROJECT_PATH: /home/bluez
     TESTSLIB: $PROJECT_PATH/tests/lib
     SNAP_NAME: bluez
+    SNAP_ARCH: amd64
     # Allow the host to pass the channel to use for the test run
     SNAP_CHANNEL: $(HOST:echo $SNAP_CHANNEL)
+    SNAP_AUTO_ALIASES: bluetoothctl obexctl
 
 backends:
     qemu:
@@ -45,8 +47,5 @@ suites:
             - ubuntu-core-16
         prepare: |
             . $TESTSLIB/prepare.sh
-        prepare-each: |
-            . $TESTSLIB/prepare-each.sh
         restore-each: |
             . $TESTSLIB/restore-each.sh
-
