@@ -74,6 +74,7 @@ parts:
       - --enable-obex
       - --disable-systemd
       - --disable-silent-rules
+      - --enable-test
     build-packages:
       - libglib2.0-dev
       - libdbus-1-dev
@@ -98,6 +99,10 @@ parts:
       - usr/bin/hcitool
       - usr/share/doc/libical1a/copyright
       - $libical1a
+    install: |
+      # Run all tests shiped by default
+      make check
+
   common:
     plugin: dump
     organize:
