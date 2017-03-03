@@ -9,14 +9,19 @@ description: |
  License (GPL). See the project homepage for more details:
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
+grade: stable
 
 apps:
   bluetoothctl:
     command: usr/bin/bluetoothctl
     plugs: [client]
+    aliases:
+      - bluetoothctl
   obexctl:
     command: usr/bin/obexctl
     plugs: [client]
+    aliases:
+      - obexctl
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
@@ -25,6 +30,27 @@ apps:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
     slots: [service]
+  hciconfig:
+    command: usr/bin/hciconfig
+    plugs: [bluetooth-control]
+    aliases:
+      - hciconfig
+  hcidump:
+    command: usr/bin/hcidump
+    plugs: [bluetooth-control]
+    aliases:
+      - hcidump
+  hciattach:
+    command: usr/bin/hciattach
+    plugs: [bluetooth-control]
+    aliases:
+      - hciattach
+  hcitool:
+    command: usr/bin/hcitool
+    plugs: [bluetooth-control]
+    aliases:
+      - hcitool
+
 plugs:
   client:
       interface: bluez
@@ -66,10 +92,17 @@ parts:
       - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
       - usr/bin/obexctl
+      - usr/bin/hciconfig
+      - usr/bin/hcidump
+      - usr/bin/hciattach
+      - usr/bin/hcitool
       - usr/share/doc/libical1a/copyright
       - $libical1a
-  dbus-configuration:
-    plugin: copy
-    files:
+  common:
+    plugin: dump
+    organize:
       copyright: usr/share/doc/bluez/copyright
       doc/overview.md: usr/share/doc/bluez/overview.md
+    prime:
+      - usr/share/doc/bluez/copyright
+      - usr/share/doc/bluez/overview.md
