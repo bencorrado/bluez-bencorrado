@@ -50,6 +50,11 @@ apps:
     plugs: [bluetooth-control]
     aliases:
       - hcitool
+  sdptool:
+    command: usr/bin/sdptool
+    plugs: [client]
+    aliases:
+      - sdptool
 
 plugs:
   client:
@@ -97,6 +102,7 @@ parts:
       - usr/bin/hcidump
       - usr/bin/hciattach
       - usr/bin/hcitool
+      - usr/bin/sdptool
       - usr/share/doc/libical1a/copyright
       - $libical1a
     install: |
