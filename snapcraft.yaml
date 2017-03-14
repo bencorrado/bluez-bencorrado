@@ -37,7 +37,7 @@ apps:
       - hciconfig
   hcidump:
     command: usr/bin/hcidump
-    plugs: [bluetooth-control]
+    plugs: [bluetooth-control, network-control]
     aliases:
       - hcidump
   hciattach:
@@ -55,6 +55,11 @@ apps:
     plugs: [client]
     aliases:
       - sdptool
+  btmon:
+    command: usr/bin/btmon
+    plugs: [bluetooth-control, network-control]
+    aliases:
+      - btmon
 
 plugs:
   client:
@@ -75,7 +80,6 @@ parts:
       - --enable-experimental
       - --enable-threads
       - --disable-cups
-      - --disable-monitor
       - --enable-obex
       - --disable-systemd
       - --disable-silent-rules
@@ -103,6 +107,7 @@ parts:
       - usr/bin/hciattach
       - usr/bin/hcitool
       - usr/bin/sdptool
+      - usr/bin/btmon
       - usr/share/doc/libical1a/copyright
       - $libical1a
     install: |
