@@ -1,11 +1,11 @@
 ---
-title: "Snap installation"
+title: "Install BlueZ"
 table_of_contents: True
 ---
 
 # Snap installation
 
-The *bluez* snap shall be installed as any other snap on Ubuntu Core, type:
+The *bluez* snap can be installed as any other snap on Ubuntu Core, type:
 
 ```
 kzapalowicz@core16:~$ snap install bluez
@@ -16,7 +16,7 @@ will be informed that the snap has been installed and your screen should look
 like:
 
 ```
-kzapalowicz@core16:~$ snap install bluez
+$ snap install bluez
 bluez 5.37-2 from 'canonical' installed
 ```
 
@@ -39,7 +39,7 @@ again. Type:
 
 
 ```
-kzapalowicz@core16:~$ snap interfaces | grep blue
+$ snap interfaces | grep blue
 bluez:service             bluez:client
 :bluetooth-control        -
 kzapalowicz@core16:~$
@@ -47,30 +47,3 @@ kzapalowicz@core16:~$
 
 This time it lists the bluez:service slot and the bluez:client plug that are
 provided by the *bluez* snap itself.
-
-# Refreshing the snap
-
-Right now you have the *bluez* snap installed from the *stable* channel.
-Alternatively however you could refresh the snap from another channel namely to
-get the access to not yet released features yet made available for testing.
-
-Note that the official release process uses different channels as a sign of
-maturity of a particular snap version. It starts in the *beta* and *edge* then
-is moved through *candidate* to the *stable* channel.
-
-Refresh the snap from the *edge* channel to get access to the version with the
-most features, type:
-
-
-```
-kzapalowicz@core16:~$ snap refresh --edge bluez
-```
-
-You will see a very similar output to the one that you have seen
-during the installation process:
-
-
-```
-kzapalowicz@core16:~$ snap refresh --edge bluez
-bluez (edge) 5.37-2 from 'canonical' refreshed
-```

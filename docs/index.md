@@ -6,11 +6,11 @@ table_of_contents: False
 # About Bluetooth
 
 Bluetooth is a standard for wireless communication on short distances. It
-standarizez multiple profiles for different use-cases such as music streaming,
-serial connections, message exchange, phone calls, etc... It has been first
-published in 1994 and since then has been updated several times. The recent
-version called Bluetooth 5 is a major update and step forward towards the IoT
-market and it's needs.
+standarized multiple profiles for different use-cases such as music streaming,
+serial connections, message exchange, phone calls, and many others. It has been
+first published in 1994 and since then has been updated several times. The
+recent version called Bluetooth 5 is a major update and step forward towards
+the IoT market and it's needs.
 
 Bluetooth is developed and published by the [Bluetooth Special Interest
 Group](http://www.bluetooth.com/)
@@ -30,8 +30,5 @@ Currently BlueZ consists of many separate modules:
 * Configuration and testing utilities
 * Protocol decoding and analysis tools
 
-Follow the link to learn about [Supported
-Profiles](http://www.bluez.org/profiles/)
-
-Follow the link to [Learn more](http://www.bluez.org/)
-
+You can find more information about this on the BlueZ upstream homepage
+[here](http://www.bluez.org/)

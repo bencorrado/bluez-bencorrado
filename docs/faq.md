@@ -23,7 +23,7 @@ Failed to start discovery: org.bluez.Error.NotReady
 [bluetooth]#
 ``` 
 
-Power the chip on explicitely, type:
+Power the chip on explicitly, type:
 
 ```
 [bluetooth]# power on
@@ -33,7 +33,7 @@ Changing power on succeeded
 [bluetooth]#
 ```
 
-## Ubuntu Core fails to pair with a device that requires confirmation
+## Pairing fails with a device that requires confirmation
 
 The common mistake when using *bluetoothctl* to access BlueZ is to forget about
 registering an agent. The agent entity is responsible for handling the
@@ -41,7 +41,7 @@ authentication requests that are a part of the pairing procedure.
 
 If the agent is not registered then the pairing fails.
 
-Make sure that the agent is registered by typig:
+Make sure that the agent is registered by typing:
 
 ```
 [bluetooth]# agent on
@@ -62,7 +62,7 @@ Agent is already registered
 ## I cannot connect to an already paired device after reboot or long idle time
 
 The Bluetooth devices that required user-confirmation during the pairing
-procedure will require the pairig agent to re-connect after they have been
+procedure will require the pairing agent to re-connect after they have been
 disconnected.
 
 Note that the reason for disconnection might be power-cycling the Ubuntu Core
@@ -74,10 +74,10 @@ would do it for the first time. Note that you do not have to pair the devices
 again (unless you know that one of them has lost the pairing information) but
 you will need to connect them.
 
-Type
+In order to do it, type:
 
 ```
-kzapalowicz@core16:~$ sudo bluez.bluetoothctl 
+$ sudo bluez.bluetoothctl 
 [bluetooth]# agent on
 Agent registered
 [bluetooth]# connect 90:7F:61:11:44:C8

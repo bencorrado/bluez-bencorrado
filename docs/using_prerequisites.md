@@ -20,40 +20,56 @@ Make sure that the latest *bluez* snap is installed. You can check this by using
 *snap list* command:
 
 ```
-kzapalowicz@core16:~$ snap list
+$ snap list
 Name                            Version        Rev   Developer  Notes
 bluez                           5.37-2         27    canonical  -
-canonical-se-engineering-tests  6              113   canonical  -
-core                            16-2           1431  canonical  -
-pi2-kernel                      4.4.0-1040-47  26    canonical  -
-pi3                             16.04-0.5      14    canonical  -
-udisks2                         2.1.7-6        45    canonical  -
-wireless-tools                  1              5     canonical  -
-kzapalowicz@core16:~$
+$
 ```
 
 If *bluez* is not listed by the above command you can install it with:
 
 ```
-kzapalowicz@core16:~$ sudo snap install bluez
+$ sudo snap install bluez
 ```
 
-## Service is up and running
+## The Bluetooth daemons are running
 
-Normally, once the snap is installed, the Bluetooth service is up and running.
-Nevertheless it is still good to verify this. The expected output should contain
-both *bluetoothd* and *obexd*.
+Normally, once the snap is installed, the Bluetooth daemons is up and running.
+Nevertheless it is still good to verify this.
+
+For *bluetoothd* type:
 
 ```
-kzapalowicz@core16:~$ ps aux | grep bluetooth | awk '{print $1" "$11}'
-root /snap/bluez/27/usr/lib/bluetooth/bluetoothd
-root /snap/bluez/27/usr/lib/bluetooth/obexd
-kzapalo+ grep
-kzapalowicz@core16:~$
+$ systemctl status snap.bluez.bluez.service
 ```
 
-Note that the *awk* part in the above command is not needed, it is just to make
-the output look pretty.
+The expected output should look like:
+
+```
+● snap.bluez.bluez.service - Service for snap application bluez.bluez
+   Loaded: loaded (/etc/systemd/system/snap.bluez.bluez.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2016-11-02 15:15:31 UTC; 4 months 11 days ago
+ Main PID: 1580 (bluetoothd)
+   CGroup: /system.slice/snap.bluez.bluez.service
+           └─1580 /snap/bluez/x2/usr/lib/bluetooth/bluetoothd -E
+```
+
+For *obexd* type:
+
+```
+$ systemctl status snap.bluez.obex.service
+```
+
+The expected output should look like:
+
+```
+● snap.bluez.obex.service - Service for snap application bluez.obex
+   Loaded: loaded (/etc/systemd/system/snap.bluez.obex.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2016-11-02 15:15:31 UTC; 4 months 11 days ago
+ Main PID: 1584 (obexd)
+   CGroup: /system.slice/snap.bluez.obex.service
+           └─1584 /snap/bluez/x2/usr/lib/bluetooth/obexd
+```
 
 Note that you need *bluetoothd* for the regular Bluetooth usage, however it is
 not enough for exchanging files over Bluetooth. For this to work you need the
@@ -68,10 +84,10 @@ sake of exercise it is good to verify
 
 
 ```
-kzapalowicz@core16:~$ snap interfaces | grep bluez
+$ snap interfaces bluez
 bluez:service             bluez:client
 -                         bluez:bluetooth-control
-kzapalowicz@core16:~$
+$
 ```
 
 You should expect the output like the above, that is the *bluez:service* slot is

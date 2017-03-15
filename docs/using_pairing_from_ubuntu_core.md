@@ -17,7 +17,7 @@ You should see the output similar to the following:
 
 
 ```
-kzapalowicz@core16:~$ sudo bluez.bluetoothctl
+$ sudo bluez.bluetoothctl
 [NEW] Controller 00:1A:7D:DA:71:08 core16 [default]
 [NEW] Device 00:25:56:D1:36:6B ubuntu-0
 [bluetooth]#
@@ -29,8 +29,8 @@ as previously paired ones. Note that there might be multiple or no lines
 starting with [NEW] Device, as it depends on what has been happening before. The
 last line is the *bluetoothctl* prompt.
 
-Since the pairing procedure will involve authentication by pin, it is required
-to register with an authentication agent. This entity handles the pin prompt. In
+Since the pairing procedure will involve authentication by PIN, it is required
+to register with an authentication agent. The agent handles the PIN prompt. In
 order to do it type:
 
 
@@ -39,7 +39,7 @@ order to do it type:
 ```
 
 You should see the output like below that indicates that the agent has been
-successfully registred.
+successfully registered.
 
 
 ```
@@ -76,25 +76,8 @@ Which is then followed with found device events that looks like:
 [NEW] Device <bluetooth address> <name>
 ```
 
-At the moment you see the device you want to pair with discovered, stop the
-discovery process:
-
-```
-[bluetooth]# scan off
-```
-
-You will see output like this:
-
-```
-[CHG] Device 00:25:56:D1:36:6B TxPower is nil
-[CHG] Device 00:25:56:D1:36:6B RSSI is nil
-[CHG] Device 08:3E:8E:E6:79:47 TxPower is nil
-[CHG] Device 08:3E:8E:E6:79:47 RSSI is nil
-[CHG] Device 67:FD:35:AE:38:87 RSSI is nil
-Discovery stopped
-[CHG] Controller 00:1A:7D:DA:71:08 Discovering: no
-[bluetooth]#
-```
+The device discovery process will be stopped automatically the moment a pairing
+attempt will be started.
 
 At this stage, the remote device has been discovered and is known, therefore it
 is now possible to pair with it. The target device is identified by its address,
@@ -118,7 +101,7 @@ Now do the device pairing:
 
 Both of the devices will try to establish a link and as it has been already
 described it might require authentication. This guide walks you through pairing
-with a keyboard therefore there will be pin prompt unless you have skipped the
+with a keyboard therefore there will be PIN prompt unless you have skipped the
 agent registration. In that case the pairing will fail.
 
 You should see output like the following:

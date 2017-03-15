@@ -1,9 +1,9 @@
 ---
-title: "Ubuntu Core for Bluetooth development"
+title: "Device enablement with Bluetooth"
 table_of_contents: True
 ---
 
-## Ubuntu Core for Bluetooth development
+## Device enablement with Bluetooth
 
 This page provides the information about what are the requirements for an Ubuntu
 Core system to support Bluetooth.
@@ -14,3 +14,8 @@ BlueZ up and running on Ubuntu Core based systems.
 The application development section will show what are the necessary bits in
 the *snapcraft.yaml* to successfully snap an application that uses Bluetooth.
 
+You can quickly jump to the chapters using the list below:
+
+ - [Linux kernel supported versions](stacks/bluetooth/development_kernel_supported_version.html)
+ - [Linux kernel configuration options](stacks/bluetooth/development_kernel_configuration_options.html)
+ - [Snapping a Bluetooth application](stacks/bluetooth/development_snapping_bluetooth_enabled_application.html)

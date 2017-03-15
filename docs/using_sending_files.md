@@ -6,7 +6,8 @@ table_of_contents: True
 # Using Bluetooth to send files on Ubuntu Core
 
 This section describes what has to be done to be able to send files over
-Bluetooth using Ubuntu Core device. It will focus on the OBEX Object Push
+Bluetooth using Ubuntu Core device. It will focus on the [OBEX Object
+Push](https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=309007&amp;vId=346844)
 profile which is a standard Bluetooth profile for such an use case.
 
 ## Prerequisites
@@ -32,11 +33,7 @@ device is:
 | OBEX Object Push | 0x1105 |
 
 If you are unsure about which profiles are enabled, then check this using the
-*sdptool* utility which is available on Ubuntu Desktop. Note that this tool is not
-yet available on Ubuntu Core. This tool allows you to browse the service
-database of a remote device thus making it possible to check the supported
-profiles. You should look for output like below and verify that the OBEX Object
-Push is listed.
+*sdptool* utility:
 
 ```
 % sdptool browse 00:1A:7D:DA:71:0F
@@ -90,11 +87,10 @@ Profile Descriptor List:
     Version: 0x0102
 ```
 
-Note that the sdptool tool will be part of the bluez snap starting with version
-5.37-3. It is expected to be released towards the end of March 2017.
-o
+## Connect OPP profile
 
-## Connect OBEX Object Push profile
+Make sure that the pairing is successfully completed. You can learn how to do it
+on the [Pairing page](stacks/bluetooth/using_pairing_general.html)
 
 Once the pairing is successfully completed, it is time to connect the OBEX
 Object Push profile. To interact with OBEX, the obexctl tool is used. Open
@@ -107,7 +103,7 @@ $ sudo bluez.obexctl
 You will see output like this:
 
 ```
-$ sudo bluez.obexctl
+$ sudo obexctl
 [NEW] Client /org/bluez/obex 
 [obex]#
 ```
@@ -146,6 +142,11 @@ Note that the file you are about to send should be accessible to the snap,
 therefore it must be placed in a readable location. For example:
 /var/snap/bluez/current.
 
+Also keep in mind that the regular use of the OPP shall be accomplished through
+the [D-Bus OBEX
+API](https://git.kernel.org/pub/scm/bluetooth/bluez.git/tree/doc/obex-api.txt)
+therefore the bluez snap itself does not need access to other snaps data. 
+
 Below is example output of sending a file:
 
 ```
@@ -164,23 +165,22 @@ Transfer /org/bluez/obex/client/session5/transfer10
 
 ## Receiving files
 
-By default there is no way to receive a file using Bluetooth on Ubuntu Core.
-This is because the incoming transfer has to be allowed. However, the obexctl
-tool does not provide such an agent. It is assumed that the application will
-implement this. For reference, here is the OBEX D-Bus Agent API description:
-https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc/obex-agent-api.txt
+By default there is no way to receive a file using Bluetooth on Ubuntu Core
+unless the application snap implements the receiving side. This is because the
+incoming transfer has to be allowed. However, the obexctl tool does not provide
+such an agent. It is assumed that the application will implement this. For
+reference, here is the [OBEX D-Bus Agent
+API](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc/obex-agent-api.txt)
+description.
 
-It might be possible to auto-allow all incoming transfers by passing the
---auto-allow flag to the obexd daemon. However, this is disabled because of
-security reasons on Ubuntu Core.
+For convenience, there is a bluez-tests snap that packages the
+[simple-obex-agent](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/test/simple-obex-agent)
+Python script that implements the mentioned API. It can be used to allow
+incoming file transfers through OBEX. The script itself has a small
+modifications to make it compatible with Ubuntu Core specifics (Ubuntu Core uses
+system, not session bus).
 
-For convenience, there will soon be a bluez-tests snap that packages the
-simple-obex-agent Python script that implements the mentioned API. It can be
-used to allow incoming file transfers through OBEX. The script itself is a
-slightly modified version of
-https://git.kernel.org/cgit/bluetooth/bluez.git/tree/test/simple-obex-agent.
-The modifications make it compatible with Ubuntu Core specifics.  Usage
-When the bluez-tests snap is available first install it, type:
+Install the bluez-tests snap
 
 ```
 $ sudo snap install bluez-tests
@@ -196,19 +196,3 @@ $ sudo bluez-tests.simple-obex-agent
 
 From now on it will listen for incoming OBEX transfers and when such transfers
 happen, it will prompt for a decision: accept or deny.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

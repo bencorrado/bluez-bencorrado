@@ -25,13 +25,9 @@ table lists the commands that are provided by the *bluez* snap:
 | hcitool      | Tool used to configure Bluetooth connections                  |
 | sdptool      | A tool to perform SDP queries on Bluetooth devices            |
 
-Note that the amount of commands provided by this snap may change in the future
-versions of it. For example the current version in *stable* channel provides
-only *obexctl* and *bluetoothctl* commands.  There is however a quick way of
-checking what a snap provides and to do this you can use the snap scheme for
-exposing commands which is *snap_name.command*. So in order to learn all the
-commands provided by the *bluez* snap type:
-
+There is a quick way of checking what a snap provides and to do this you can
+use the snap scheme for exposing commands which is *snap_name.command*. So in
+order to learn all the commands provided by the *bluez* snap type:
 
 ```
 $ bluez.<TAB><TAB>

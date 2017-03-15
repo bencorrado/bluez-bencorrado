@@ -31,7 +31,7 @@ includes both the Bluetooth service (*bluetoothd* and *obexd*) and the client
 applications (*bluetoothctl* and *obexctl*). Because of this it defines the
 slots and plugs.
 
-The snatd-alone Bluetooth application that could be used in place of
+The stand-alone Bluetooth application that could be used in place of
 *bluetoothctl* need to take care only of the client side. In fact all it has to
 do is to define a *bluez* plug.
 

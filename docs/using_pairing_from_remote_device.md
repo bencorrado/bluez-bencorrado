@@ -10,19 +10,20 @@ procedure. It will search, discover and initiate pairing. The only thing that an
 Ubuntu Core device has to make sure of is to be discoverable and pairable, as
 this will allow the remote device to discover and initiate a connection with it.
 
-Assuming that you have just started the bluetoothctl type:
-
 ```
+$ bluetoothctl
 [bluetooth]# discoverable on
 Changing discoverable on succeeded
 [bluetooth]# pairable on
 Changing pairable on succeeded
 ```
 
+At this stage the Ubuntu Core device is ready to be discovered.
 It is important to register the pairing agent so that the authentication process
 can be completed. Type:
 
 ```
+$ bluetoothctl
 [bluetooth]# agent on
 Agent registered
 [bluetooth]# default-agent 
@@ -33,8 +34,8 @@ At this stage the Ubuntu Core device is ready to be discovered. Take your remote
 Bluetooth device and start discovering. After a short while you should see the
 Ubuntu Core device on the list of found devices. Initiate the pairing.
 
-Notice that the Ubuntu Core device will display the pairing confirmation coming
-from the agent:
+Notice that the bluetoothctl will display the pairing confirmation coming from
+the agent:
 
 ```
 [CHG] Device 00:1A:7D:DA:71:08 Connected: yes
