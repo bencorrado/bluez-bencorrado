@@ -90,7 +90,7 @@ Profile Descriptor List:
 ## Connect OPP profile
 
 Make sure that the pairing is successfully completed. You can learn how to do it
-on the [Pairing page](stacks/bluetooth/using_pairing_general.html)
+on the [Pairing page](using_pairing_general.html)
 
 Once the pairing is successfully completed, it is time to connect the OBEX
 Object Push profile. To interact with OBEX, the obexctl tool is used. Open

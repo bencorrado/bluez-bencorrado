@@ -12,6 +12,6 @@ classic (that is .deb, .rpm, .ebuild, or etc... based)
 
 In particular it will discuss:
 
-* Prerequisites
-* How to do both inbound and outbound pairing
-* How to send files over Bluetooth
+* [Prerequisites](using_prerequisites.html)
+* [How to do both inbound and outbound pairing](using_pairing_general.html)
+* [How to send files over Bluetooth](using_general.html)

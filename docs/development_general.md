@@ -16,6 +16,6 @@ the *snapcraft.yaml* to successfully snap an application that uses Bluetooth.
 
 You can quickly jump to the chapters using the list below:
 
- - [Linux kernel supported versions](stacks/bluetooth/development_kernel_supported_version.html)
- - [Linux kernel configuration options](stacks/bluetooth/development_kernel_configuration_options.html)
- - [Snapping a Bluetooth application](stacks/bluetooth/development_snapping_bluetooth_enabled_application.html)
+ - [Linux kernel supported versions](development_kernel_supported_version.html)
+ - [Linux kernel configuration options](development_kernel_configuration_options.html)
+ - [Snapping a Bluetooth application](development_snapping_bluetooth_enabled_application.html)

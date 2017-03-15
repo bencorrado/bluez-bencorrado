@@ -25,8 +25,8 @@ Pairing with a remote device can be done in two ways due to the fact that it can
 be initiated from both endpoints. Both ways are described further in this
 section.
 
-* [Inbound pairing](stacks/bluetooth/using_pairing_from_remote_device.html)
-* [Outbound pairing](stacks/bluetooth/using_pairing_from_ubuntu_core.html)
+* [Inbound pairing](using_pairing_from_remote_device.html)
+* [Outbound pairing](using_pairing_from_ubuntu_core.html)
 
 ## Handling authentication requests by BlueZ
 
