@@ -9,9 +9,9 @@ This section will describe what comes with the *bluez* snap.
 
 ## Commands
 
-As first and foremost thing the *bluez* snap offers the BlueZ stack. Apart from
-this it contains various tools shipped with the BlueZ itself. The following
-table lists the commands that are provided by the *bluez* snap:
+The thing the *bluez* snap offers the BlueZ stack. Apart from this it contains
+various tools shipped with BlueZ itself. The following table lists the
+commands that are provided by the *bluez* snap:
 
 | Command      | Short description                                             |
 |--------------|---------------------------------------------------------------|
@@ -25,26 +25,24 @@ table lists the commands that are provided by the *bluez* snap:
 | hcitool      | Tool used to configure Bluetooth connections                  |
 | sdptool      | A tool to perform SDP queries on Bluetooth devices            |
 
-There is a quick way of checking what a snap provides and to do this you can
-use the snap scheme for exposing commands which is *snap_name.command*. So in
-order to learn all the commands provided by the *bluez* snap type:
+There is a quick way of checking what a snap provides. To do this you can use
+the snap scheme for exposing commands which is *snap_name.command*. To see
+all the commands provided by the *bluez* snap type:
 
 ```
 $ bluez.<TAB><TAB>
 ```
 
 The double **TAB** indicates that you should hit the tab key twice for bash
-auto-completion to kick in. Immediately you will be rewarded with the list
+auto-completion to kick in. Immediately you will see a list of
 available commands:
 
 ```
-kzapalowicz@core16:~$ bluez.
+$ bluez.
 bluez.bluetoothctl  bluez.hciattach     bluez.hciconfig     bluez.hcidump
 bluez.hcitool       bluez.obexctl       bluez.sdptool       
-kzapalowicz@core16:~$ bluez.
+$ bluez.
 ```
-
-Note that the daemons are not auto-completed. 
 
 ## Plugs and slots
 

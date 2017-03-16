@@ -10,7 +10,7 @@ command-line interface to the BlueZ
 
 
 ```
-kzapalowicz@core16:~$ sudo bluez.bluetoothctl
+$ sudo bluez.bluetoothctl
 ```
 
 You should see the output similar to the following:

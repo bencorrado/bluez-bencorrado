@@ -16,7 +16,7 @@ request. One of the reasons might be that the Bluetooth hardware unpowered.
 Whenever you see something like this:
 
 ```
-kzapalowicz@core16:~$ sudo bluez.bluetoothctl 
+$ sudo bluez.bluetoothctl 
 [NEW] Controller 00:1A:7D:DA:71:08 core16 [default]
 [bluetooth]# scan on
 Failed to start discovery: org.bluez.Error.NotReady
