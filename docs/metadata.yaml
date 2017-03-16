@@ -16,6 +16,8 @@ navigation:
 
   - title: Reference
     children:
+    - title: Introduction
+      location: reference/introduction.md
     - title: Prerequisites
       location: reference/using-prerequisites.md
     - title: Commands
@@ -30,6 +32,8 @@ navigation:
         location: reference/pairing/inbound.md
     - title: Sending files
       location: reference/sending-files.md
+    - title: Accessing GATT services
+      location: reference/gatt-services.md
     - title: Enablement
       children:
       - title: Introduction

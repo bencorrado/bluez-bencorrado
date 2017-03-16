@@ -1,5 +1,5 @@
 ---
-title: "What the bluez snap offers"
+title: "Available commands"
 table_of_contents: True
 ---
 

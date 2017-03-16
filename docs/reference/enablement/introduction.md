@@ -1,5 +1,5 @@
 ---
-title: "Device enablement with Bluetooth"
+title: "Introduction to device enablement with Bluetooth"
 table_of_contents: True
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Install BlueZ"
+title: "Install bluez snap"
 table_of_contents: True
 ---
 

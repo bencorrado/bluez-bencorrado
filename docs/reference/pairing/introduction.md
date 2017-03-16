@@ -1,5 +1,5 @@
 ---
-title: "General information on pairing"
+title: "Introduction to pairing"
 table_of_contents: True
 ---
 
@@ -34,11 +34,23 @@ The pairing procedure includes an authentication that requires confirmation by
 the user. If you have ever used Bluetooth previously you probably remeber
 entering pin code or answering "would you like to connect yes/no" question.
 
-The authentication requests are handled by an entity called *agent*. It
-implements the [D-Bus agent
-api](https://git.kernel.org/pub/scm/bluetooth/bluez.git/tree/doc/agent-api.txt)
-and it's purpose is to prompt the user for confirmation whenever it is
-necessary.
+To pair with other devices BlueZ uses an agent-style dbus API. See the
+following links for more details on this:
+
+ * [Agent API](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc/agent-api.txt)
+ * [Device API](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc/device-api.txt)
+
+Within the bluetoothctl utility we can register such an agent with a
+specific IO capability with the BlueZ service and then process any
+further pairing operation.
+
+If no agent is registered with BlueZ and a pairing operation happens
+BlueZ will consider the IO capability as NoInputNoOutput and try to
+pair with the remove device without further user interaction.
+
+NOTE: If using NoInputNoOutput this results in an unauthenticated
+communication link with the remote device and will always use the
+JustWorks method.
 
 The agent has to be registered explicitly by typing:
 
@@ -48,6 +60,5 @@ $ sudo bluetoothctl
 Agent registered
 ```
 
-The pairing section will walk you through pairing procedure with keyboard. It
-will require pin code authentication.
-
+The pairing section will walk you through pairing procedure with a keyboard. It
+will require passcode authentication.
