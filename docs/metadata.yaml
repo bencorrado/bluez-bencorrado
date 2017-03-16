@@ -7,50 +7,48 @@ navigation:
       - title: About BlueZ
         location: index.md
       - title: Bluetooth on Ubuntu Core
-        location: bluetooth_on_ubuntu_core.md
+        location: bluetooth-on-ubuntu-core.md
 
   - title: Install & Configure
     children:
     - title: Install bluez
-      location: snap_installation.md
+      location: install-bluez.md
 
   - title: Reference
     children:
-    - title: Commands
-      location: snap_what_it_offers.md
-    - title: Using Bluetooth on Ubuntu Core
-      location: using_general.md
     - title: Prerequisites
-      location: using_prerequisites.md
+      location: reference/using-prerequisites.md
+    - title: Commands
+      location: reference/available-commands.md
     - title: Pairing
       children:
-      - title: Pairing overview
-        location: using_pairing_general.md
+      - title: Introduction
+        location: reference/pairing/introduction.md
       - title: Outbound pairing
-        location: using_pairing_from_ubuntu_core.md
+        location: reference/pairing/outbound.md
       - title: Inbound pairing
-        location: using_pairing_from_remote_device.md
+        location: reference/pairing/inbound.md
     - title: Sending files
-      location: using_sending_files.md
-    - title: Building Ubuntu Core based systems with Bluetooth
+      location: reference/sending-files.md
+    - title: Enablement
       children:
-      - title: General information
-        location: development_general.md
-      - title: Linux kernel supported versions
-        location: development_kernel_supported_version.md
+      - title: Introduction
+        location: reference/enablement/introduction.md
+      - title: Supported Linux kernels
+        location: reference/enablement/supported-kernels.md
       - title: Linux kernel configuration options
-        location: development_kernel_configuration_options.md
+        location: reference/enablement/kernel-configuration-options.md
       - title: Snapping a Bluetooth application
-        location: development_snapping_bluetooth_enabled_application.md
+        location: reference/enablement/snapping-bluetooth-enabled-application.md
 
   - title: Troubleshoot
     children:
       - title: FAQ
-        location: faq.md
+        location: troubleshoot/faq.md
 
   - title: Release Notes
-    location: release_notes.md
+    location: release-notes.md
 
   - title: Report a Bug
-    location: report_a_bug.md
+    location: report-bug.md
 
