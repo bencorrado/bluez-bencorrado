@@ -113,7 +113,7 @@ parts:
     plugin: dump
     organize:
       copyright: usr/share/doc/bluez/copyright
-      doc/overview.md: usr/share/doc/bluez/overview.md
+      docs: usr/share/doc/bluez/
     prime:
       - usr/share/doc/bluez/copyright
-      - usr/share/doc/bluez/overview.md
+      - usr/share/doc/bluez/
