@@ -38,7 +38,7 @@ apps:
       - hciconfig
   hcidump:
     command: usr/bin/hcidump
-    plugs: [bluetooth-control, network-control]
+    plugs: [bluetooth-control, network-control, home]
     aliases:
       - hcidump
   hciattach:
@@ -58,7 +58,7 @@ apps:
       - sdptool
   btmon:
     command: usr/bin/btmon
-    plugs: [bluetooth-control, network-control]
+    plugs: [bluetooth-control, network-control, home]
     aliases:
       - btmon
 
