@@ -1,9 +1,9 @@
 ---
-title: "Install bluez snap"
+title: "Install bluez"
 table_of_contents: True
 ---
 
-# Snap installation
+# Install bluez
 
 Install the *bluez* snap via:
 
@@ -11,8 +11,8 @@ Install the *bluez* snap via:
 $ snap install bluez
 ```
 
-Observe that the snap is being downloaded and installed. Observe that the snap
-has been installed should look like:
+The snap is being downloaded and installed. Observe that the snap has been
+installed should look like:
 
 ```
 $ snap install bluez

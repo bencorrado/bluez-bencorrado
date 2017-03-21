@@ -15,11 +15,8 @@ There are two Bluetooth related interfaces available on Ubuntu Core.
 **bluez** interface that allows accessing the Bluetooth service through D-Bus
 API
 
-**bluetooth-control** that can be used to manage the state of the Bluetooth
-service as well as accessing the hardware directly bypassing the D-Bus API.
-
-In normal circumstances the *bluez* interface shall be used as the uses cases
-for *bluetooth-control* interface are somewhat special.
+**bluetooth-control** that can be used to talk to the kernel-side of the
+Bluetooth stack directly. 
 
 ## Contents of the snapcraft.yaml
 
@@ -52,4 +49,4 @@ apps:
 
 Note that if by any chance your application needs to talk directly to the chip
 then the *bluetooth-control* interface will suit these needs better than the
-*bluez*. 
+*bluez* one.

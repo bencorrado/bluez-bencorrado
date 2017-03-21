@@ -3,7 +3,7 @@ title: "Linux kernel configuration options"
 table_of_contents: True
 ---
 
-# Kernel configuration options
+# Linux kernel configuration options
 
 This section lists the Linux kernel configuration options related to the
 Bluetooth support. It is based on the Linux kernel v4.4.
@@ -62,7 +62,7 @@ Device Drivers
 
 Below are the Linux kenrel config options for reference. They are based on the 
 *Linux core16 4.4.0-1040-raspi2* kernel which is the official Ubuntu Core Linux
-kernel for RPi.
+kernel for Raspberry Pi 2/3.
 
 ```
 CONFIG_NET=y

@@ -1,17 +1,17 @@
 ---
 title: "Linux kernel supported versions"
-table_of_contents: True
+table_of_contents: False
 ---
 
 # Linux kernel supported versions
 
 The Ubuntu Core officially supports Linux kernel version 4.4 therefore any new
-IoT device that is Ubuntu Core base should pick it. Moreover this is a long term
-supported kernel by the Linux kernel community.
+IoT device that is Ubuntu Core base should pick it if possible. Moreover this
+is a long term supported kernel by the Linux kernel community.
 
-Also, you could go back in time and use an older version of Linux kernel. Keep
-in mind however that some features might not be available. For example you need
-at least Linux kernel v3.13 to have the Bluetooth Low Energy functioning. 
+Also, you could use an older version of Linux kernel. Keep in mind however that
+some features might not be available. For example you need at least Linux
+kernel v3.13 to have the Bluetooth Low Energy functioning. 
 
 Using an older kernel yet having a good interoperability will most probably
 require you to backport the Bluetooth part of the kernel from the newer release.
@@ -34,5 +34,3 @@ kernels](https://github.com/snapcore/sample-kernels) that have all the bits
 necessary for *snapd* to run included. Also make sure to read the [Board
 enablement
 overview](https://docs.ubuntu.com/core/en/guides/build-device/board-enablement).
-
-

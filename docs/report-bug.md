@@ -35,7 +35,8 @@ $ bluetoothctl
 ### State of the Bluetooth kill-switch
 
 ```
-rfkill list
+$ snap install wireless-tools
+$ sudo wireless-tools.rfkill list
 ```
 
 Note that the *rfkill* command is a part of *wireless-tools* snap.

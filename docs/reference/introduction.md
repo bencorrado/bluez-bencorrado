@@ -3,7 +3,7 @@ title: "Introduction"
 table_of_contents: False
 ---
 
-# Using Bluetooth on Ubuntu Core
+# Introduction
 
 This section gives a short overview of what is possible with the bluez snap
 at the moment. It is not however Ubuntu Core specific and the steps described
@@ -15,11 +15,8 @@ utility called bluetoothctl which can be started from the command
 line. The use in different scenarios will be explained in the
 following sections.
 
-NOTE: The bluetoothctl utility used on the examples below just uses
-the DBus APIs provided by the BlueZ service. It does nothing else.
-The DBus APIs of the BlueZ service are available at
-
-[DBus API](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc)
+**NOTE:** The bluetoothctl utility used on the examples below just uses
+the DBus APIs provided by the BlueZ service.
 
 There are also various small python script examples to play with the
 DBus API at

@@ -11,11 +11,14 @@ snap while the user-space portion can be installed as a separate snap.
 
 ## The Bluetooth interfaces on Ubuntu Core
 
-On Ubuntu Core the bridges between the snaps and the Bluetooth stack are the
-Bluetooth interfaces called:
+On Ubuntu Core each application can access and interact with the Bluetooth
+service only through two specialized interfaces called:
 
- - bluetooth-control
- - bluez
+ * bluetooth-control
+ * bluez
+
+You can learn more on the [interfaces
+documentation](https://docs.ubuntu.com/core/en/reference/interfaces/index)
 
 Note that unlike the *bluetooth-control* interface the *bluez* interface is not
 installed by the *core* snap, neither the *gadget* nor *kernel*. It shall be
@@ -55,6 +58,6 @@ $ snap interfaces | grep blue
 :bluetooth-control        -
 ```
 
-Observe that obviously there is a core-installed *bluetooth-control* interface
-available but there is no *bluez* at all. It is defined by *snapd* however you
-need an application snap to reveal it.
+Observe that there is a *bluetooth-control* slot provided by the core snap. This
+is unlike to *bluez* because no snap exists which provides a slot based on the
+*bluez* interface. You need an application snap to reveal it.

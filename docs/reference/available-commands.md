@@ -3,9 +3,9 @@ title: "Available commands"
 table_of_contents: True
 ---
 
-# What the bluez snap offers
+# Available Commands
 
-This section will describe what comes with the *bluez* snap.
+This section will describe which commands are provided by the *bluez* snap.
 
 ## Commands
 
@@ -17,7 +17,7 @@ commands that are provided by the *bluez* snap:
 |--------------|---------------------------------------------------------------|
 | bluez        | The *bluetoothd* Bluetooth daemon                             |
 | obex         | The *obexd* OBEX daemon                                       |
-| bluetoothctl | A command-line interface to the BlueZ 			       |	
+| bluetoothctl | A command-line interface to the BlueZ 			       |
 | obexctl      | A command-line interface to the BlueZ for file transfers      |
 | hciconfig    | HCI device configuration utility                              |
 | hcidump      | Reads raw HCI data and prints it on screen                    |
@@ -43,10 +43,3 @@ bluez.bluetoothctl  bluez.hciattach     bluez.hciconfig     bluez.hcidump
 bluez.hcitool       bluez.obexctl       bluez.sdptool       
 $ bluez.
 ```
-
-## Plugs and slots
-
-The *bluez* snap provides two daemons for the 'Bluetooth' service to work. Each
-one of them provides a *service* slot for the applications to be able to talk to
-them.
-

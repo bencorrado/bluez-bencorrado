@@ -3,16 +3,17 @@ title: "Accessing GATT services"
 table_of_contents: True
 ---
 
-# Connect with LE devices
+# Accessing GATT services
 
 In this example we want to connect with a LE device and explore its
-provided GATT services. The uses LE device in this example provides
+provided GATT services. The used LE device in this example provides
 a number of vendor specific GATT services but also the standard
 battery GATT service.
 
-First, connect with the discovered LE device
+First, connect with the discovered LE device by using the bluetoothctl command
 
 ```
+$ sudo bluetoothctl
 [bluetooth]# connect 5C:31:3E:71:0C:E7
 Attempting to connect to 5C:31:3E:71:0C:E7
 [CHG] Device 5C:31:3E:71:0C:E7 Connected: yes
@@ -20,7 +21,7 @@ Connection successful
 ```
 
 As soon as BlueZ has discovered which GATT services are available the
-bluetoothctl utility will print out these
+bluetoothctl utility will print these out
 
 ```
 [CHG] Device 5C:31:3E:71:0C:E7 UUIDs: 00001800-0000-1000-8000-00805f9b34fb
@@ -70,8 +71,8 @@ bluetoothctl utility will print out these
 [CHG] Device 5C:31:3E:71:0C:E7 Alias: X4-LIFE Xmarty 2.0
 ```
 
-It is now possible to select specific characteristics and read their values or
-if possible also write them. This example focuses on the battery level
+It is now possible to select specific characteristics and read their values or,
+if possible, also write them. This example focuses on the battery level
 characteristic from the battery GATT service.
 
 ```
@@ -82,7 +83,7 @@ Attempting to read /org/bluez/hci0/dev_5C_31_3E_71_0C_E7/service0029/char002a
   49
 ```
 
-It is possible also to receive notifications when the value of a characteristic
+It is also possible to receive notifications when the value of a characteristic
 changes
 
 ```

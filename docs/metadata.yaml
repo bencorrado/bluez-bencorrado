@@ -22,27 +22,29 @@ navigation:
       location: reference/using-prerequisites.md
     - title: Commands
       location: reference/available-commands.md
+    - title: DBus API
+      location: reference/dbus-api.md
     - title: Pairing
       children:
       - title: Introduction
         location: reference/pairing/introduction.md
-      - title: Outbound pairing
+      - title: Outbound Pairing
         location: reference/pairing/outbound.md
-      - title: Inbound pairing
+      - title: Inbound Pairing
         location: reference/pairing/inbound.md
-    - title: Sending files
+    - title: Sending Files
       location: reference/sending-files.md
-    - title: Accessing GATT services
+    - title: Accessing GATT Services
       location: reference/gatt-services.md
-    - title: Enablement
+    - title: Device Enablement
       children:
       - title: Introduction
         location: reference/enablement/introduction.md
-      - title: Supported Linux kernels
+      - title: Supported Linux Kernels
         location: reference/enablement/supported-kernels.md
       - title: Linux kernel configuration options
         location: reference/enablement/kernel-configuration-options.md
-      - title: Snapping a Bluetooth application
+      - title: Snapping a Bluetooth Application
         location: reference/enablement/snapping-bluetooth-enabled-application.md
 
   - title: Troubleshoot
