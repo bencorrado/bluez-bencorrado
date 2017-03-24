@@ -9,9 +9,9 @@ This section will describe which commands are provided by the *bluez* snap.
 
 ## Commands
 
-The thing the *bluez* snap offers the BlueZ stack. Apart from this it contains
-various tools shipped with BlueZ itself. The following table lists the
-commands that are provided by the *bluez* snap:
+The purpose of the *bluez* snap is to provide the BlueZ Bluetooth stack. Apart
+from this it contains various tools shipped with BlueZ itself. The following
+table lists the commands that are provided by the *bluez* snap:
 
 | Command      | Short description                                             |
 |--------------|---------------------------------------------------------------|

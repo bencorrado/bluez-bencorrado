@@ -1,9 +1,9 @@
 ---
-title: "Accessing GATT services"
+title: "Accessing GATT Services"
 table_of_contents: True
 ---
 
-# Accessing GATT services
+# Accessing GATT Services
 
 In this example we want to connect with a LE device and explore its
 provided GATT services. The used LE device in this example provides
@@ -21,7 +21,7 @@ Connection successful
 ```
 
 As soon as BlueZ has discovered which GATT services are available the
-bluetoothctl utility will print these out
+bluetoothctl utility will print out the following:
 
 ```
 [CHG] Device 5C:31:3E:71:0C:E7 UUIDs: 00001800-0000-1000-8000-00805f9b34fb
@@ -84,7 +84,7 @@ Attempting to read /org/bluez/hci0/dev_5C_31_3E_71_0C_E7/service0029/char002a
 ```
 
 It is also possible to receive notifications when the value of a characteristic
-changes
+changes.
 
 ```
 [X4-LIFE Xmarty 2.0:/service0029/char002a]# notify on

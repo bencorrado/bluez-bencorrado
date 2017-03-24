@@ -11,7 +11,7 @@ navigation:
 
   - title: Install & Configure
     children:
-    - title: Install bluez
+    - title: Install BlueZ
       location: install-bluez.md
 
   - title: Reference

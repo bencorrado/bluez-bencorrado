@@ -3,7 +3,7 @@ title: "Linux kernel configuration options"
 table_of_contents: True
 ---
 
-# Linux kernel configuration options
+# Linux Kernel Configuration Options
 
 This section lists the Linux kernel configuration options related to the
 Bluetooth support. It is based on the Linux kernel v4.4.
@@ -11,7 +11,7 @@ Bluetooth support. It is based on the Linux kernel v4.4.
 Note that the default Linux kernel for Ubuntu Core has al the necessary bits
 enabled by default.
 
-Most of the Bluetooth systems will support the *Classic* mode therefore you need
+Most of the Bluetooth systems will support *Classic* mode therefore you need
 to make sure that the following options are selected.
 
 ```
@@ -33,11 +33,11 @@ to make sure that the following options are selected.
 ```
 
 Note that this is a general set and it might be further tweaked to match your
-device use-cases and capabilities. For example on devices that will not offer
-networking over Bluetooth the *BNEP* can be disabled. 
+device use-cases and capabilities. For example, on devices that will not offer
+networking over Bluetooth, a *BNEP* can be disabled. 
 
-Note that if your Bluetooth controller (chip) supports Bluetooth Low Energy
-leave the BLE related options selected, disable otherwise:
+Note that if your Bluetooth controller (chip) supports Bluetooth Low Energy,
+then leave the BLE related options selected or disable otherwise:
 
 ```
   [*] Networking support

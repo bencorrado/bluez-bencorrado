@@ -12,7 +12,7 @@ $ snap install bluez
 ```
 
 The snap is being downloaded and installed. Observe that the snap has been
-installed should look like:
+installed like follows:
 
 ```
 $ snap install bluez
@@ -33,9 +33,7 @@ $ sudo apt install bluez
 
 on a classic Ubuntu flavor that you run on your desktop or laptop computer.
 
-Now, lets do the interfaces listing exercise from the previous section once
-again. Type:
-
+Again, let's list the interfaces:
 
 ```
 $ snap interfaces | grep blue

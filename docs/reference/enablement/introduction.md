@@ -1,15 +1,15 @@
 ---
-title: "Introduction to device enablement with Bluetooth"
+title: "Introduction to Device Enablement with Bluetooth"
 table_of_contents: True
 ---
 
-## Device enablement with Bluetooth
+## Device Enablement with Bluetooth
 
-This page provides the information about what are the requirements for an Ubuntu
+This page provides information about what are the requirements for an Ubuntu
 Core system to support Bluetooth.
 
-The Linux kernel part will tell about the Linux kernel requirements for having
-BlueZ up and running on Ubuntu Core based systems.
+The Linux kernel section will tell about the Linux kernel requirements for
+having BlueZ up and running on Ubuntu Core based systems.
 
 The application development section will show what are the necessary bits in
 the *snapcraft.yaml* to successfully snap an application that uses Bluetooth.
