@@ -1,9 +1,9 @@
 ---
-title: "Inbound pairing"
+title: "Inbound Pairing"
 table_of_contents: True
 ---
 
-# Pairing from remote device
+# Pairing From Remote Device
 
 In this scenario it is the remote device that is active in the pairing
 procedure. It will search, discover and initiate pairing. The only thing that an
@@ -31,10 +31,11 @@ Default agent request successful
 ```
 
 At this stage the Ubuntu Core device is ready to be discovered. Take your remote
-Bluetooth device and start discovering. After a short while you should see the
-Ubuntu Core device on the list of found devices. Initiate the pairing.
+Bluetooth device and start the discovering process. After a short while you
+should see the Ubuntu Core device on the list of found devices. Initiate the
+pairing.
 
-Notice that the bluetoothctl will display the pairing confirmation coming from
+Notice that bluetoothctl will display the pairing confirmation coming from
 the agent:
 
 ```

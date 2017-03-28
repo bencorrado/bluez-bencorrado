@@ -7,7 +7,7 @@ table_of_contents: False
 
 Bugs can be reported [here](https://bugs.launchpad.net/snappy-hwe-snaps/+filebug).
 
-## Information required to include in a bug report
+## Information Required to Include in a Bug Report
 
 When submitting a bug report, please attach:
 
@@ -17,13 +17,13 @@ When submitting a bug report, please attach:
  * State of the Bluetooth kill-switch
  * The HCI trace
 
-### Bluetooth adapter information
+### Bluetooth Adapter Information
 
 ```
 $ sudo hciconfig -a
 ```
 
-### List of paired devices
+### List of Paired Devices
 
 ```
 $ bluetoothctl
@@ -41,7 +41,7 @@ $ sudo wireless-tools.rfkill list
 
 Note that the *rfkill* command is a part of *wireless-tools* snap.
 
-### The HCI trace
+### The HCI Trace
 
 The HCI trace is a snapshot of the communication between the Bluetooth host
 (software stack) and the Bluetooth controller (the chip). The *btmon* tool can
@@ -49,7 +49,7 @@ be used to capture such for both live debugging and saving it for later. Note
 that the HCI trace needs to be captured at the same time the Bluetooth issue
 occurs.
 
-The *btmon* executed without any parameters will offer live debugging which
+When *btmon* is executed without any parameters will offer live debugging which
 will print in a ‘tail -f’ fashion an ongoing exchange of the commands and
 events between the stack and the chip. It is possible however to make it save
 the data in the [snoop format](https://tools.ietf.org/html/rfc1761) which can
@@ -58,13 +58,13 @@ later be viewed using for example [Wireshark](https://www.wireshark.org).
 Now, for live debugging:
 
 ```
-$ sudo bluez.btmon
+$ sudo btmon
 ```
 
 For saving it later in a .snoop format:
 
 ```
-$ sudo bluez.btmon --write ~/hcitrace.snoop
+$ sudo btmon --write ~/hcitrace.snoop
 ```
 
 The nice thing about btmon and how it works is that it is possible to have

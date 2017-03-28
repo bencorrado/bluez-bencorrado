@@ -1,16 +1,16 @@
 ---
-title: "Outbound pairing"
+title: "Outbound Pairing"
 table_of_contents: True
 ---
 
 # Pairing from Ubuntu Core
 
 Having the *bluez* snap installed start the *bluetoothctl* tool which is a
-command-line interface to the BlueZ
+command-line interface to BlueZ.
 
 
 ```
-$ sudo bluez.bluetoothctl
+$ sudo bluetoothctl
 ```
 
 You should see the output similar to the following:
@@ -23,10 +23,10 @@ $ sudo bluez.bluetoothctl
 [bluetooth]#
 ```
 
-The *[NEW] Controller* line displays the information about your Bluetooth chip.
-The *[NEW] Device* line displays the information about already known devices such
+The "[NEW] Controller" line displays the information about your Bluetooth chip.
+The "[NEW] Device" line displays the information about already known devices such
 as previously paired ones. Note that there might be multiple or no lines
-starting with [NEW] Device, as it depends on what has been happening before. The
+starting with [NEW] Device, as it depends on what happened prior. The
 last line is the *bluetoothctl* prompt.
 
 Since the pairing procedure will involve authentication by PIN, it is required
@@ -53,7 +53,7 @@ Note that having the agent registered while performing pairing with a device
 that does not require user confirmation to the pairing attempt will have no 
 negative impact and is safe to do so. 
 
-At this point, you can proceed with scanning for a remote Bluetooth devices. To
+At this point, you can proceed with scanning for remote Bluetooth devices. To
 do this type:
 
 ```
@@ -67,7 +67,7 @@ Discovery started
 [CHG] Controller 00:1A:7D:DA:71:08 Discovering: yes
 ```
 
-Which is then followed with found device events that looks like:
+Which is then followed with found device events that look like:
 
 ```
 [NEW] Device 08:3E:8E:E6:79:47 annapurna
@@ -77,21 +77,21 @@ Which is then followed with found device events that looks like:
 ```
 
 The device discovery process will be stopped automatically the moment a pairing
-attempt will be started.
+attempt is started.
 
 At this stage, the remote device has been discovered and is known, therefore it
 is now possible to pair with it. The target device is identified by its address,
-so make sure that you put the correct one.
+so make sure that you specify the correct one.
 
 Note that after a certain amount of time the device discovery results are
-invalidated. When this happens you see output like this:
+invalidated. When this happens you see output like the following:
 
 ```
 [DEL] Device 00:25:56:D1:36:6B ubuntu-0
 ```
 
-If you still want to pair with this device all you need to do is to redo the
-device discovery step. Do scan on once again.
+If you still want to pair with this device then simply redo the
+device discovery step. Do *scan on* once again.
 
 Now do the device pairing:
 
@@ -101,7 +101,7 @@ Now do the device pairing:
 
 Both of the devices will try to establish a link and as it has been already
 described it might require authentication. This guide walks you through pairing
-with a keyboard therefore there will be PIN prompt unless you have skipped the
+with a keyboard, therefore, there will be PIN prompt unless you have skipped the
 agent registration. In that case the pairing will fail.
 
 You should see output like the following:

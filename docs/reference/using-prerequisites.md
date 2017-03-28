@@ -10,11 +10,11 @@ Bluetooth on an Ubuntu Core device.
 
 In short you have to make sure that:
 
- * The snap is installed
+ * The BlueZ snap is installed
  * The Bluetooth daemons are running
  * The plugs and slots are connected
 
-## The bluez snap is installed
+## The Bluez Snap is Installed
 
 Make sure that the latest *bluez* snap is installed. You can check this by using
 *snap list* command:
@@ -32,9 +32,9 @@ If *bluez* is not listed by the above command you can install it with:
 $ sudo snap install bluez
 ```
 
-## The Bluetooth daemons are running
+## The Bluetooth Daemons are Running
 
-Normally, once the snap is installed, the Bluetooth daemons is up and running.
+Normally, once the snap is installed, the Bluetooth daemon is up and running.
 Nevertheless it is still good to verify this.
 
 For *bluetoothd* type:
@@ -76,7 +76,7 @@ not enough for exchanging files over Bluetooth. For this to work you need the
 *obexd* daemon. It is mentioned here because, for example, on Ubuntu Desktop the
 *obexd* is not started by default.
 
-## The plugs and slots are connected
+## The Plugs and Slots are Connected
 
 Checking for the Bluetooth plug and slot being auto-connected is one of the snap
 verification criteria therefore in 99.9% cases it will be as expected. For the

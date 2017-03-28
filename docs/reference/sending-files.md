@@ -1,23 +1,24 @@
 ---
-title: "Sending files using OPP"
+title: "Sending Files Using OPP"
 table_of_contents: True
 ---
 
-# Using Bluetooth to send files on Ubuntu Core
+# Using Bluetooth to Send Files on Ubuntu Core
 
-This section describes what has to be done to be able to send files over
-Bluetooth using Ubuntu Core device. It will focus on the [OBEX Object
+This section describes the required steps to be able to send files over
+Bluetooth using an Ubuntu Core device. It will focus on the [OBEX Object
 Push](https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=309007&amp;vId=346844)
-profile which is a standard Bluetooth profile for such an use case.
+profile which is a standard Bluetooth profile for such a use case.
 
 ## Prerequisites
 
-The bluez snap is installed
+Make sure that:
 
-Service is up and running
+* The bluez snap is installed.
+* Service is up and running.
+* Both devices are paired.
 
-The both devices shall be paired. Refer to the previous section in order to
-learn how to do it.
+Refer to the previous sections in order to learn how to do it.
 
 The files will be sent to the server which is a Bluetooth-enabled device with
 the Object Push profile enabled. If this is not fulfilled then Ubuntu Core will
@@ -87,7 +88,7 @@ Profile Descriptor List:
     Version: 0x0102
 ```
 
-## Connect OPP profile
+## Connect OPP Profile
 
 Make sure that the pairing is successfully completed. You can learn how to do it
 on the [Pairing page](pairing/introduction.html)
@@ -109,8 +110,9 @@ $ sudo obexctl
 ```
 
 This indicates that the OBEX client has been properly initialized and is
-awaiting commands. The first thing to do is to get it connected to the remote
-server which is the device that has been paired in the previous step. Type:
+awaiting interactive commands. The first thing to do is to get it connected to
+the remote server which is the device that has been paired in the previous
+step. Type:
 
 ```
 [obex]# connect 00:25:56:D1:36:6B
@@ -129,7 +131,7 @@ Connection successful
 The above indicates that the connection has been established. Check the address
 of the remote device in the prompt. It is now possible to send files.
 
-## Sending files
+## Sending Files
 
 In order to send files use the *send* command while connected to the OBEX Object
 Push profile. For sending a file type:
@@ -163,11 +165,11 @@ Transfer /org/bluez/obex/client/session5/transfer10
 [DEL] Transfer /org/bluez/obex/client/session5/transfer10
 ```
 
-## Receiving files
+## Receiving Files
 
 By default there is no way to receive a file using Bluetooth on Ubuntu Core
 unless the application snap implements the receiving side. This is because the
-incoming transfer has to be allowed. However, the obexctl tool does not provide
+incoming transfer has to be allowed and the obexctl tool does not provide
 such an agent. It is assumed that the application will implement this. For
 reference, here is the [OBEX D-Bus Agent
 API](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc/obex-agent-api.txt)
@@ -176,9 +178,9 @@ description.
 For convenience, there is a bluez-tests snap that packages the
 [simple-obex-agent](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/test/simple-obex-agent)
 Python script that implements the mentioned API. It can be used to allow
-incoming file transfers through OBEX. The script itself has a small
+incoming file transfers through OBEX. The script itself has small
 modifications to make it compatible with Ubuntu Core specifics (Ubuntu Core uses
-system, not session bus).
+the system, not session bus).
 
 Install the bluez-tests snap
 
@@ -186,9 +188,9 @@ Install the bluez-tests snap
 $ sudo snap install bluez-tests
 ```
 
-When the above operation successfully finishes, you are able to use it and
-experiment with receiving file transfers. Open another shell on the device and
-start the simple-obex-agent by typing:
+When the above operation successfully finishes, you are able to use the
+simple-obex-agent and experiment with receiving file transfers. Open another
+shell on the device and start the simple-obex-agent by typing:
 
 ```
 $ sudo bluez-tests.simple-obex-agent

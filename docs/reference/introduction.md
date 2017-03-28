@@ -6,7 +6,7 @@ table_of_contents: False
 # Introduction
 
 This section gives a short overview of what is possible with the bluez snap
-at the moment. It is not however Ubuntu Core specific and the steps described
+at the moment. It is not, however, Ubuntu Core specific and the steps described
 here will work on any other Linux system with BlueZ installed on it regardless
 if it is snap or classic (that is .deb, .rpm, .ebuild, or etc... based)
 

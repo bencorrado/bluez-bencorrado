@@ -8,12 +8,12 @@ table_of_contents: False
 This section covers some of the most commonly encountered problems and attempts
 to provide solutions for them.
 
-## I'm seeing org.bluez.Error.NotReady
+## I'm Seeing org.bluez.Error.NotReady
 
 The *NotReady* error code indicates that the stack is not ready to fulfill the
-request. One of the reasons might be that the Bluetooth hardware unpowered.
+request. One of the reasons might be that the Bluetooth hardware is unpowered.
 
-Whenever you see something like this:
+Whenever you see something like:
 
 ```
 $ sudo bluez.bluetoothctl 
@@ -33,7 +33,7 @@ Changing power on succeeded
 [bluetooth]#
 ```
 
-## Pairing fails with a device that requires confirmation
+## Pairing Fails With a Device That Requires Confirmation
 
 The common mistake when using *bluetoothctl* to access BlueZ is to forget about
 registering an agent. The agent entity is responsible for handling the
@@ -62,19 +62,19 @@ Agent is already registered
 ## I cannot connect to an already paired device after reboot or long idle time
 
 The Bluetooth devices that required user-confirmation during the pairing
-procedure will require the pairing agent to re-connect after they have been
+procedure will require the pairing agent to reconnect after they have been
 disconnected.
 
 Note that the reason for disconnection might be power-cycling the Ubuntu Core
 device or idle-timeout on the remote device side when left idle for a longer
 period of time. It will, therefore, happen aside from explicit disconnection.
 
-When this happens use the *bluetoothctl* to reconnect to the given device as you
+When this happens use *bluetoothctl* to reconnect to the given device as you
 would do it for the first time. Note that you do not have to pair the devices
 again (unless you know that one of them has lost the pairing information) but
 you will need to connect them.
 
-In order to do it, type:
+In order to do this, type:
 
 ```
 $ sudo bluez.bluetoothctl 
