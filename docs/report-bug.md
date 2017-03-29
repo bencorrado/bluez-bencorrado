@@ -49,8 +49,8 @@ be used to capture such for both live debugging and saving it for later. Note
 that the HCI trace needs to be captured at the same time the Bluetooth issue
 occurs.
 
-When *btmon* is executed without any parameters will offer live debugging which
-will print in a ‘tail -f’ fashion an ongoing exchange of the commands and
+When *btmon* is executed without any parameters, it will offer live debugging
+which will print in a ‘tail -f’ fashion an ongoing exchange of the commands and
 events between the stack and the chip. It is possible however to make it save
 the data in the [snoop format](https://tools.ietf.org/html/rfc1761) which can
 later be viewed using for example [Wireshark](https://www.wireshark.org).
