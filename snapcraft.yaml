@@ -1,5 +1,5 @@
 name: bluez
-version: 5.44-1-dev
+version: 5.44-1
 type: app
 summary: Bluetooth tools and daemons
 description: |
