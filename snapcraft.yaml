@@ -13,12 +13,12 @@ grade: stable
 
 apps:
   bluetoothctl:
-    command: usr/bin/bluetoothctl
+    command: bin/client-wrapper usr/bin/bluetoothctl
     plugs: [client, uhid]
     aliases:
       - bluetoothctl
   obexctl:
-    command: usr/bin/obexctl
+    command: bin/client-wrapper usr/bin/obexctl
     plugs: [client]
     aliases:
       - obexctl
@@ -70,6 +70,11 @@ slots:
       interface: bluez
 
 parts:
+  bluez-common:
+    plugin: dump
+    source: bin/
+    organize:
+      client-wrapper: bin/client-wrapper
   bluez:
     plugin: autotools
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
