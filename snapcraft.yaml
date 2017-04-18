@@ -71,9 +71,10 @@ slots:
 
 parts:
   bluez-common:
-    plugin: copy
-    files:
-      bin/client-wrapper: bin/client-wrapper
+    plugin: dump
+    source: bin/
+    organize:
+      client-wrapper: bin/client-wrapper
   bluez:
     plugin: autotools
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
