@@ -9,9 +9,12 @@ Bugs can be reported [here](https://bugs.launchpad.net/snappy-hwe-snaps/+filebug
 
 ## Information Required to Include in a Bug Report
 
-When submitting a bug report, please attach:
+When submitting a bug report, please attach system log coming from the journal:
 
- * */var/log/syslog*
+ * $ journalctl --no-pager > system-log
+
+Moreover please include the following information:
+
  * Bluetooth adapter information
  * List of paired devices
  * State of the Bluetooth kill-switch
