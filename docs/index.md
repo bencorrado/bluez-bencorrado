@@ -40,5 +40,5 @@ Bluetooth on Ubuntu Core:
 
 * [Bluetooth on Ubuntu Core](bluetooth-on-ubuntu-core.md)
 * [Install bluez snap](install-bluez.md)
-* [Learn about it's offerings](reference/introduction.md)
-* [Learn how to enable Ubuntu Core device with Bluetooth](reference/enablement/introduction.md)
+* [Learn about its offerings](reference/introduction.md)
+* [Learn how to enable an Ubuntu Core device with Bluetooth](reference/enablement/introduction.md)
