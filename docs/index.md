@@ -32,3 +32,13 @@ Currently BlueZ consists of many separate modules:
 
 You can find more information about this on the BlueZ upstream homepage
 [here](http://www.bluez.org/)
+
+# Learn More
+
+Follow these links directly or use the menu on the left to learn more about
+Bluetooth on Ubuntu Core:
+
+* [Bluetooth on Ubuntu Core](bluetooth-on-ubuntu-core.md)
+* [Install bluez snap](install-bluez.md)
+* [Learn about its offerings](reference/introduction.md)
+* [Learn how to enable an Ubuntu Core device with Bluetooth](reference/enablement/introduction.md)
