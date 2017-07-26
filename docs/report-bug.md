@@ -70,6 +70,22 @@ For saving it later in a .snoop format:
 $ sudo btmon --write ~/hcitrace.snoop
 ```
 
+In case you are saving the .snoop file under the home directory make sure that
+the bluez snap has the home interface connected.
+
+```
+$ sudo snap list interfaces
+```
+
+If not, then connect it
+
+```
+$ sudo snap connect bluez:home :home
+```
+
+Alternatively you should be able to save the file into a snap-writable folder
+such as either ~/snap/bluez/common or /var/snap/bluez/current.
+
 The nice thing about btmon and how it works is that it is possible to have
 several versions of it executed simultaneously. This allows capturing logs as
 in the last example in one shell and viewing it live in another.
