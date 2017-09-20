@@ -182,10 +182,13 @@ incoming file transfers through OBEX. The script itself has small
 modifications to make it compatible with Ubuntu Core specifics (Ubuntu Core uses
 the system, not session bus).
 
+This feature has not been yet released, however, it is available in the edge
+channel for testing.
+
 Install the bluez-tests snap
 
 ```
-$ sudo snap install bluez-tests
+$ sudo snap install --edge bluez-tests
 ```
 
 When the above operation successfully finishes, you are able to use the
@@ -198,3 +201,6 @@ $ sudo bluez-tests.simple-obex-agent
 
 From now on it will listen for incoming OBEX transfers and when such transfers
 happen, it will prompt for a decision: accept or deny.
+
+Please note that the software in the edge channel is for testing purposes only,
+therefore, do not hesitate to report any bugs or inconveniences found.
