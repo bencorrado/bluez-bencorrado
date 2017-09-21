@@ -105,6 +105,7 @@ parts:
       - libudev-dev
       - udev
       - pkg-config
+      - libjson-c-dev
     stage-packages:
       - libical1a
     filesets:
