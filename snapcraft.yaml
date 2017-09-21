@@ -1,5 +1,5 @@
 name: bluez
-version: 5.44-4-dev
+version: 5.47-1-dev
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -62,6 +62,10 @@ apps:
     command: usr/bin/btmgmt
     plugs: [bluetooth-control, network-control]
     aliases: [btmgmt]
+  meshctl:
+    command: usr/bin/meshctl
+    plugs: [bluetooth-control, network-control]
+    aliases: [meshctl]
 
 plugs:
   client:
@@ -80,7 +84,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
     source-type: git
-    source-branch: bluez/5.44
+    source-branch: bluez/5.47
     configflags:
       - --prefix=/usr
       - --libexec=/usr/lib/
@@ -92,6 +96,7 @@ parts:
       - --disable-silent-rules
       - --enable-test
       - --enable-deprecated
+      - --enable-mesh
     build-packages:
       - libglib2.0-dev
       - libdbus-1-dev
@@ -100,6 +105,7 @@ parts:
       - libudev-dev
       - udev
       - pkg-config
+      - libjson-c-dev
     stage-packages:
       - libical1a
     filesets:
@@ -117,6 +123,7 @@ parts:
       - usr/bin/sdptool
       - usr/bin/btmon
       - usr/bin/btmgmt
+      - usr/bin/meshctl
       - usr/share/doc/libical1a/copyright
       - $libical1a
     install: |
