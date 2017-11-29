@@ -1,4 +1,4 @@
-name: bluez
+name: bluez-bencorrado
 version: 5.47-1-dev
 type: app
 summary: Bluetooth tools and daemons
